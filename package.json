@@ -15,7 +15,7 @@
     "typeorm": "0.3.10"
   },
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "ts-node --transpile-only src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs"
   }
 }
