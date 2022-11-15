@@ -4,6 +4,7 @@ import * as cors from 'cors'; // liberando acesso para o front!
 import * as logger from 'morgan';
 import { AppDataSource } from './data-source';
 import { Accounts } from './entity/Accounts';
+import { Users } from './entity/Users';
 import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 
@@ -28,10 +29,17 @@ AppDataSource.initialize()
     account.balance = 100;
 
     await AppDataSource.manager.save(account);
-    console.log('Saved a new user with id: ' + account.id);
+    console.log('Saved a new account with id: ' + account.id);
+
+    const user = new Users();
+    user.username = '@Joaopfsiqueira';
+    user.password = '123';
+
+    await AppDataSource.manager.save(user);
+    console.log('Saved a new Users with id: ' + user.id);
 
     console.log('Loading users from the database...');
-    const users = await AppDataSource.manager.find(Accounts);
+    const users = await AppDataSource.manager.find(Users);
     console.log('Loaded users: ', users);
 
     console.log(

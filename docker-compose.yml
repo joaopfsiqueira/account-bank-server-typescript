@@ -15,8 +15,8 @@ services:
     image: 'postgres:latest'
     ports:
       - '5432:${DB_PORT}'
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data #persistindo dados para quando derrubar container não apagar os arquivos.
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data #persistindo dados para quando derrubar container não apagar os arquivos.
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
