@@ -6,8 +6,8 @@ services:
     build: .
     ports:
       - ${PORT}:${PORT}
-    # depends_on:
-    #   -
+    depends_on:
+      - db
     volumes:
       - .:/usr/src/server
 

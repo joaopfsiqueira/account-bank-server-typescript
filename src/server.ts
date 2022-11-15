@@ -1,5 +1,7 @@
 import { AppDataSource } from './data-source';
 import { Accounts } from './entity/Accounts';
+import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
 
 AppDataSource.initialize()
   .then(async () => {

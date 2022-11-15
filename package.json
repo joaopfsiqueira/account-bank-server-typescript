@@ -4,14 +4,15 @@
   "description": "Awesome project developed with TypeORM.",
   "type": "commonjs",
   "devDependencies": {
-    "ts-node": "10.7.0",
     "@types/node": "^16.11.10",
+    "dotenv": "^16.0.3",
+    "ts-node": "10.7.0",
     "typescript": "4.5.2"
   },
   "dependencies": {
-    "typeorm": "0.3.10",
+    "pg": "^8.4.0",
     "reflect-metadata": "^0.1.13",
-    "pg": "^8.4.0"
+    "typeorm": "0.3.10"
   },
   "scripts": {
     "start": "ts-node src/server.ts",
