@@ -34,6 +34,7 @@ AppDataSource.initialize()
     const user = new Users();
     user.username = '@Joaopfsiqueira';
     user.password = '123';
+    user.account = account;
 
     await AppDataSource.manager.save(user);
     console.log('Saved a new Users with id: ' + user.id);
