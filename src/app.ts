@@ -5,6 +5,7 @@ import * as logger from 'morgan';
 import { AppDataSource } from './data-source';
 import { Accounts } from './entity/Accounts';
 import { Users } from './entity/Users';
+import { Transactions } from './entity/Transactions';
 import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 
@@ -26,9 +27,10 @@ AppDataSource.initialize()
     console.log('Inserting a new user into the database...');
 
     const account = new Accounts();
-    account.balance = 100;
+    const account2 = new Accounts(); // nãoo preciso especificar o value, já que na entity eu seto um valor padrão.
 
     await AppDataSource.manager.save(account);
+    await AppDataSource.manager.save(account2);
     console.log('Saved a new account with id: ' + account.id);
 
     const user = new Users();
@@ -36,12 +38,32 @@ AppDataSource.initialize()
     user.password = '123';
     user.account = account;
 
+    const user2 = new Users();
+    user2.username = '@Romasiqueira';
+    user2.password = '123';
+    user2.account = account2;
+
     await AppDataSource.manager.save(user);
+    await AppDataSource.manager.save(user2);
     console.log('Saved a new Users with id: ' + user.id);
 
     console.log('Loading users from the database...');
     const users = await AppDataSource.manager.find(Users);
     console.log('Loaded users: ', users);
+
+    const transaction = new Transactions();
+    transaction.value = 50;
+    transaction.debitedAccount = account;
+    transaction.creditedAccount = account2;
+
+    await AppDataSource.manager.save(transaction);
+
+    account.balance = account.balance - transaction.value; //debito
+    account2.balance = account2.balance + transaction.value; // credito
+    console.log(account2.balance);
+
+    await AppDataSource.manager.save(account2);
+    await AppDataSource.manager.save(account);
 
     console.log(
       'Here you can setup and run express / fastify / any other framework.'

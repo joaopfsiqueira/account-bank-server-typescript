@@ -4,6 +4,7 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  Unique,
 } from 'typeorm';
 import { Accounts } from './Accounts';
 
@@ -12,7 +13,7 @@ export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
