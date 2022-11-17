@@ -2,6 +2,9 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser'; // recebendo json e enviando json.
 import * as cors from 'cors'; // liberando acesso para o front!
 import * as logger from 'morgan';
+
+import { routerUsuario } from './routes/users';
+
 import { AppDataSource } from './data-source';
 import { Accounts } from './entity/Accounts';
 import { Users } from './entity/Users';
@@ -70,3 +73,11 @@ AppDataSource.initialize()
     );
   })
   .catch((error) => console.log(error));
+
+/**
+ * Configuração de rotas
+ */
+app.use('/usuario', routerUsuario);
+app.use('/', (req, res) => {
+  res.send('Api Account Bank');
+});
