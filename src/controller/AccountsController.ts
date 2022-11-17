@@ -6,7 +6,7 @@ import { Accounts } from '../entity/Accounts';
 import { AppDataSource } from '../data-source';
 
 export class AccountsController {
-  async salvar() {
+  public async salvar() {
     //criando Account
     const account = new Accounts();
     await AppDataSource.manager.save(account);
