@@ -10,4 +10,4 @@ const userController = new UsersControllers();
  * Serviço para salvar um novo usuario.
  */
 
-userRouter.post('/', userController.create);
+userRouter.post('/', userController.validateParamsUser, userController.create);
