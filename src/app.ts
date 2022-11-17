@@ -59,7 +59,7 @@ AppDataSource.initialize()
     await AppDataSource.manager.save(transaction);
 
     account.balance = account.balance - transaction.value; //debito
-    account2.balance = account2.balance + transaction.value; // credito
+    account2.balance = account2.balance + transaction.value; // credito o problema é que acha que vai concatenar por conta do +, dito isso, criei um transformer
     console.log(account2.balance);
 
     await AppDataSource.manager.save(account2);

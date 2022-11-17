@@ -17,7 +17,7 @@ export class Transactions {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   value: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamptz', precision: -3 })
   createdAt: Date;
 
   @ManyToOne(() => Accounts)
