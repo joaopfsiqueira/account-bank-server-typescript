@@ -5,21 +5,26 @@ import {
   OneToOne,
   JoinColumn,
   CreateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 import { Accounts } from './Accounts';
 
 @Entity()
 export class Transactions {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   value: number;
 
   @CreateDateColumn()
   createdAt: Date;
 
-  //   @OneToOne(() => Accounts)
-  //   @JoinColumn()
-  //   account: Accounts;
+  @ManyToOne(() => Accounts)
+  @JoinColumn()
+  debitedAccount: Accounts;
+
+  @ManyToOne(() => Accounts)
+  @JoinColumn()
+  creditedAccount: Accounts;
 }
