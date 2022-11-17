@@ -1,7 +1,7 @@
 import { app } from './app';
-import { routerUsuario } from './routes/users.routes';
+import { userRouter } from './routes/users.routes';
 
-app.use('/usuarios', routerUsuario);
+app.use('/usuarios', userRouter);
 app.use('/', (req, res) => res.send('Diretorio padrao'));
 
 app.listen(process.env.PORT, () =>
