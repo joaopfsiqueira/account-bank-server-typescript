@@ -6,7 +6,7 @@ import { Transactions } from './entity/Transactions';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: '172.23.66.106',
+  host: 'postgres',
   port: 5432,
   username: 'postgres',
   password: 'password',
