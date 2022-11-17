@@ -10,9 +10,10 @@ import { Accounts } from './Accounts';
 
 @Entity()
 export class Users {
-  constructor(username: string, password: string) {
+  constructor(username: string, password: string, account: Accounts) {
     this.username = username;
     this.password = password;
+    this.account = account;
   }
 
   @PrimaryGeneratedColumn('uuid')
