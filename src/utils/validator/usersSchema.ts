@@ -1,7 +1,7 @@
 import Joi = require('joi');
 
 export const userSchema = Joi.object({
-  username: Joi.string().required(),
+  username: Joi.string().required().min(3),
   password: Joi.string()
     .required()
     .pattern(
