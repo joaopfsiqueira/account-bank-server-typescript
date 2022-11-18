@@ -11,4 +11,3 @@ const userController = new UsersControllers();
  */
 
 userRouter.post('/', userController.validateParamsUser, userController.create);
-userRouter.get('/', userController.search);

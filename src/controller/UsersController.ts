@@ -55,18 +55,4 @@ export default class UsersControllers {
       });
     }
   }
-
-  public async search(req: Request, res: Response): Promise<Response> {
-    const params = req.query; // associação por desestruturação.
-    console.log(req.query);
-    try {
-      const user = await userRepository.findOneBy({
-        username: params.username,
-      });
-
-      return res.json(user);
-    } catch (error) {
-      return res.status(404).json('Usuário não encontrado!');
-    }
-  }
 }
