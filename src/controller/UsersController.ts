@@ -50,7 +50,7 @@ export default class UsersControllers {
       return res.json(user);
     } else {
       return res.status(400).send({
-        Error: 'Username já cadastrado!',
+        Message: 'Username já cadastrado!',
       });
     }
   }
