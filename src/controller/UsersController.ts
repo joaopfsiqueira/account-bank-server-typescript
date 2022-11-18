@@ -1,5 +1,5 @@
 /**
- * Criando controler, vai utilizar o entity manager do typeorm na sua ÚLTIMA VERSÃO!
+ * Criando controler, vai utilizar o repository do typeorm na sua ÚLTIMA VERSÃO! Poderia ser apenas o entity manager, mas por questão de entendimento de código, optei por usar o repository.
  */
 
 import { Request, Response } from 'express';

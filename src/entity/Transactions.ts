@@ -12,6 +12,16 @@ import { ColumnNumericTransformer } from '../common/transformersNumerics';
 
 @Entity()
 export class Transactions {
+  constructor(
+    value: number,
+    debitedAccount: Accounts,
+    creditedUsernameAccount: Accounts
+  ) {
+    this.value = value;
+    this.debitedAccount = debitedAccount;
+    this.creditedAccount = creditedUsernameAccount;
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -24,7 +34,7 @@ export class Transactions {
   })
   value: number;
 
-  @CreateDateColumn()
+  @Column({ type: 'timestamptz', nullable: true })
   createdAt: Date;
 
   @ManyToOne(() => Accounts)
