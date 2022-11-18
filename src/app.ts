@@ -4,9 +4,6 @@ import * as cors from 'cors'; // liberando acesso para o front!
 import * as logger from 'morgan';
 
 import { AppDataSource } from './data-source';
-import { Accounts } from './entity/Accounts';
-import { Users } from './entity/Users';
-import { Transactions } from './entity/Transactions';
 import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { resolve } from 'path';
 dotenv.config();
