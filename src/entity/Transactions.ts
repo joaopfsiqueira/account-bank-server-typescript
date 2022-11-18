@@ -34,7 +34,7 @@ export class Transactions {
   })
   value: number;
 
-  @Column({ type: 'timestamptz', nullable: true })
+  @CreateDateColumn()
   createdAt: Date;
 
   @ManyToOne(() => Accounts)

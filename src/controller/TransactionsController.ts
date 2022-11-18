@@ -33,7 +33,6 @@ export class TransactionsController {
         id: debitedAccount,
       });
       updateDebitedAccount.balance = updateDebitedAccount.balance - value;
-      console.log(updateDebitedAccount);
 
       const updateCreditedAccount = await accountRepository.findOneBy({
         id: creditedUsernameAccount.account.id,
