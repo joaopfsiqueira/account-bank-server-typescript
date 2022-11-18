@@ -43,7 +43,7 @@ export default class UsersControllers {
 
     if (checkIfExist === null) {
       const accountController = new AccountsController();
-      const accountCreated = await accountController.salvar();
+      const accountCreated = await accountController.create();
       const user = new Users(username, password, accountCreated); // a criação de constructor permitiu fazer dessa mandeira, caso contrario eu teria que fazer user.username = username, e por assim vai!
       user.password = bcrypt.hashSync(password, 10); //pass + saltRounds
       await userRepository.save(user); //salvando - poderia ser:   await AppDataSource.manager.save(user);

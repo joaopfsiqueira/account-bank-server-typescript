@@ -6,7 +6,7 @@ import { Accounts } from '../entity/Accounts';
 import { AppDataSource } from '../data-source';
 
 export class AccountsController {
-  public async salvar() {
+  public async create() {
     //criando Account
     const accountRepository = AppDataSource.getRepository(Accounts);
     const account = new Accounts();
