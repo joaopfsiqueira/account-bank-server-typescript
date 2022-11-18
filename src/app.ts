@@ -26,8 +26,6 @@ app.use(logger('dev'));
 // conecta no banco
 AppDataSource.initialize()
   .then(async () => {
-    console.log('Inserting a new user into the database...');
-
     // const account = new Accounts();
     // const account2 = new Accounts(); // nãoo preciso especificar o value, já que na entity eu seto um valor padrão.
 
