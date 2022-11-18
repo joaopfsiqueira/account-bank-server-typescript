@@ -35,12 +35,23 @@ export default class UsersControllers {
 
   public async create(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
-    const accountController = new AccountsController();
-    const accountCreated = await accountController.salvar();
-    const user = new Users(username, password, accountCreated); // a criação de constructor permitiu fazer dessa mandeira, caso contrario eu teria que fazer user.username = username, e por assim vai!
-    user.password = bcrypt.hashSync(password, 10); //pass + saltRounds
-    //criando usuário
-    await AppDataSource.manager.save(user);
-    return res.json(user);
+
+    const userRepository = AppDataSource.getRepository(Users); //Conectando ao repository! Ou melhor, db!
+    const checkIfExist = await userRepository.findOneBy({
+      username: username,
+    });
+
+    if (checkIfExist === null) {
+      const accountController = new AccountsController();
+      const accountCreated = await accountController.salvar();
+      const user = new Users(username, password, accountCreated); // a criação de constructor permitiu fazer dessa mandeira, caso contrario eu teria que fazer user.username = username, e por assim vai!
+      user.password = bcrypt.hashSync(password, 10); //pass + saltRounds
+      await userRepository.save(user); //salvando - poderia ser:   await AppDataSource.manager.save(user);
+      return res.json(user);
+    } else {
+      return res.status(400).send({
+        Error: 'Username já cadastrado!',
+      });
+    }
   }
 }

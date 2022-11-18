@@ -8,8 +8,9 @@ import { AppDataSource } from '../data-source';
 export class AccountsController {
   public async salvar() {
     //criando Account
+    const accountRepository = AppDataSource.getRepository(Accounts);
     const account = new Accounts();
-    await AppDataSource.manager.save(account);
+    await accountRepository.save(account);
     return account;
   }
 }
