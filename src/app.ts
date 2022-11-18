@@ -8,6 +8,7 @@ import { Accounts } from './entity/Accounts';
 import { Users } from './entity/Users';
 import { Transactions } from './entity/Transactions';
 import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import { resolve } from 'path';
 dotenv.config();
 
 // criando app
@@ -71,7 +72,3 @@ AppDataSource.initialize()
     );
   })
   .catch((error) => console.log(error));
-
-/**
- * Configuração de rotas
- */
