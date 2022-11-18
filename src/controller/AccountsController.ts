@@ -5,10 +5,11 @@
 import { Accounts } from '../entity/Accounts';
 import { AppDataSource } from '../data-source';
 
+export const accountRepository = AppDataSource.getRepository(Accounts); //Conectando ao repository! Ou melhor, db!
+
 export class AccountsController {
   public async create() {
     //criando Account
-    const accountRepository = AppDataSource.getRepository(Accounts);
     const account = new Accounts();
     await accountRepository.save(account);
     return account;

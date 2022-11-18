@@ -9,7 +9,7 @@ import { AccountsController } from './AccountsController';
 import { userSchema } from '../utils/validator/usersSchema';
 import bcrypt = require('bcrypt');
 
-const userRepository = AppDataSource.getRepository(Users); //Conectando ao repository! Ou melhor, db!
+export const userRepository = AppDataSource.getRepository(Users); //Conectando ao repository! Ou melhor, db!
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
@@ -48,7 +48,7 @@ export default class UsersControllers {
       const user = new Users(username, password, accountCreated); // a criação de constructor permitiu fazer dessa mandeira, caso contrario eu teria que fazer user.username = username, e por assim vai!
       user.password = bcrypt.hashSync(password, 10); //pass + saltRounds
       await userRepository.save(user); //salvando - poderia ser:   await AppDataSource.manager.save(user);
-      return res.json(user);
+      return res.send(user);
     } else {
       return res.status(400).send({
         Message: 'Username já cadastrado!',
