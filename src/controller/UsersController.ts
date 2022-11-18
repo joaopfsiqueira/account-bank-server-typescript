@@ -9,6 +9,8 @@ import { AccountsController } from './AccountsController';
 import { userSchema } from '../utils/validator/usersSchema';
 import bcrypt = require('bcrypt');
 
+const userRepository = AppDataSource.getRepository(Users); //Conectando ao repository! Ou melhor, db!
+
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
     try {
@@ -36,7 +38,6 @@ export default class UsersControllers {
   public async create(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
 
-    const userRepository = AppDataSource.getRepository(Users); //Conectando ao repository! Ou melhor, db!
     const checkIfExist = await userRepository.findOneBy({
       username: username,
     });
@@ -52,6 +53,20 @@ export default class UsersControllers {
       return res.status(400).send({
         Message: 'Username já cadastrado!',
       });
+    }
+  }
+
+  public async search(req: Request, res: Response): Promise<Response> {
+    const params = req.query; // associação por desestruturação.
+    console.log(req.query);
+    try {
+      const user = await userRepository.findOneBy({
+        username: params.username,
+      });
+
+      return res.json(user);
+    } catch (error) {
+      return res.status(404).json('Usuário não encontrado!');
     }
   }
 }
