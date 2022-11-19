@@ -3,13 +3,13 @@
  */
 
 import { Request, Response } from 'express';
-import { userSchema } from './usersSchema';
+import { UserSchema } from './UsersSchema';
 import { UserService } from './UserService';
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
     try {
-      const validation = userSchema.validate(req.body);
+      const validation = UserSchema.validate(req.body);
       if (validation.error) {
         if (validation.error.details[0].type === 'string.pattern.base') {
           return res.status(400).send({
