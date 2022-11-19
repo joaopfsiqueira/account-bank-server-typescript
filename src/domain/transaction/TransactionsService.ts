@@ -72,4 +72,22 @@ export class TransactionsService {
 
     return formatedTransaction;
   }
+
+  public async getUserTransactionsByCashOut(
+    account: number
+  ): Promise<Object[]> {
+    const transactionsUser = await TransactionRepository.find({
+      relations: ['debitedAccount', 'creditedAccount'],
+      where: {
+        debitedAccount: {
+          id: account,
+        },
+      },
+    });
+
+    const formatTransaction = new FormatTransaction();
+    const formatedTransaction = formatTransaction.insert(transactionsUser);
+
+    return formatedTransaction;
+  }
 }
