@@ -10,4 +10,8 @@ const TransactionController = new TransactionsController();
  * Serviço para salvar um novo usuario.
  */
 
-TransactionRouter.post('/', TransactionController.create);
+TransactionRouter.post(
+  '/',
+  TransactionController.validateParamsTransaction,
+  TransactionController.create
+);
