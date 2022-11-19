@@ -50,7 +50,7 @@ export class TransactionsService {
     return await TransactionRepository.save(newTransaction);
   }
 
-  public async userTransactions(account: number): Promise<Object[]> {
+  public async getUserTransactions(account: number): Promise<Object[]> {
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: [

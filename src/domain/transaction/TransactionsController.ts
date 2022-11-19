@@ -60,17 +60,15 @@ export class TransactionsController {
     const { account } = req.body;
 
     try {
-      const returnTransactions = await transactionService.userTransactions(
+      const returnTransactions = await transactionService.getUserTransactions(
         account
       );
       if (returnTransactions.length > 0) {
         res.send(returnTransactions);
       } else {
-        res
-          .status(404)
-          .send({
-            Message: 'Não existe transações realizadas por esse usuário!',
-          });
+        res.status(404).send({
+          Message: 'Não existe transações realizadas por esse usuário!',
+        });
       }
     } catch (error) {
       return res.status(400).send({ Message: error });
