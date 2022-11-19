@@ -3,7 +3,7 @@
  */
 
 import { Request, Response } from 'express';
-import { userSchema } from '../../utils/validator/usersSchema';
+import { userSchema } from './usersSchema';
 import { UserService } from './UserService';
 
 export default class UsersControllers {
