@@ -21,3 +21,5 @@ TransactionRouter.get(
   '/user/cashout',
   TransactionController.transactionsCashOut
 );
+
+TransactionRouter.get('/user/cashin', TransactionController.transactionsCashIn);
