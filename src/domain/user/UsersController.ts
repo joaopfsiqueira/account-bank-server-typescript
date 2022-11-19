@@ -5,6 +5,7 @@
 import { Request, Response } from 'express';
 import { createUserSchema, balanceUserSchema } from './UsersSchema';
 import * as userService from './UserService';
+import { getErrorMessage } from '../../common/GetErrorMessage';
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
@@ -46,9 +47,13 @@ export default class UsersControllers {
   public async login(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
 
-    const login = userService.loginUser(username, password);
-
-    return res.send(login);
+    try {
+      const login = await userService.loginUser(username, password);
+      console.log(login);
+      return res.send(login);
+    } catch (error) {
+      return res.status(500).send(getErrorMessage(error));
+    }
   }
 
   public async balance(req: Request, res: Response): Promise<Response> {
