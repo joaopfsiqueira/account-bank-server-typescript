@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { TransactionsService } from './TransactionsService';
-import { CheckBalance } from '../../common/checkBalance';
+import { CheckBalance } from '../../common/CheckBalance';
 import { TransactionSchema } from './TransactionsSchema';
 
 export class TransactionsController {
