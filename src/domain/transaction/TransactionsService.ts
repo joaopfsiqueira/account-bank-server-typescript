@@ -92,35 +92,51 @@ export async function getUserTransactionsByDate(date: Date): Promise<Object[]> {
 export async function getUserTransactionsByCashOut(
   account: number
 ): Promise<Object[]> {
-  const transactionsUser = await TransactionRepository.find({
-    relations: ['debitedAccount', 'creditedAccount'],
-    where: {
-      debitedAccount: {
-        id: account,
+  try {
+    const transactionsUser = await TransactionRepository.find({
+      relations: ['debitedAccount', 'creditedAccount'],
+      where: {
+        debitedAccount: {
+          id: account,
+        },
       },
-    },
-  });
+    });
 
-  const formatTransaction = new FormatTransaction();
-  const formatedTransaction = formatTransaction.insert(transactionsUser);
+    if (transactionsUser.length > 0) {
+      const formatTransaction = new FormatTransaction();
+      const formatedTransaction = formatTransaction.insert(transactionsUser);
 
-  return formatedTransaction;
+      return formatedTransaction;
+    } else {
+      throw new Error('Não existe CashOuts realizados por esse usuário!');
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getUserTransactionsByCashIn(
   account: number
 ): Promise<Object[]> {
-  const transactionsUser = await TransactionRepository.find({
-    relations: ['debitedAccount', 'creditedAccount'],
-    where: {
-      creditedAccount: {
-        id: account,
+  try {
+    const transactionsUser = await TransactionRepository.find({
+      relations: ['debitedAccount', 'creditedAccount'],
+      where: {
+        creditedAccount: {
+          id: account,
+        },
       },
-    },
-  });
+    });
 
-  const formatTransaction = new FormatTransaction();
-  const formatedTransaction = formatTransaction.insert(transactionsUser);
+    if (transactionsUser.length > 0) {
+      const formatTransaction = new FormatTransaction();
+      const formatedTransaction = formatTransaction.insert(transactionsUser);
 
-  return formatedTransaction;
+      return formatedTransaction;
+    } else {
+      throw new Error('Não existe CashIns realizados por esse usuário!');
+    }
+  } catch (error) {
+    throw error;
+  }
 }

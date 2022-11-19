@@ -5,6 +5,7 @@ import {
   TransactionSchema,
   TransactionsUserSchema,
 } from './TransactionsSchema';
+import { getErrorMessage } from '../../common/GetErrorMessage';
 
 export class TransactionsController {
   public async validateParamsTransaction(req: Request, res: Response, next) {
@@ -103,13 +104,8 @@ export class TransactionsController {
       }
       const returnTransactions =
         await transactionService.getUserTransactionsByCashOut(account);
-      if (returnTransactions.length > 0) {
-        res.send(returnTransactions);
-      } else {
-        res.status(404).send({
-          Message: 'Não existe CashOuts realizados por esse usuário!',
-        });
-      }
+
+      res.send(returnTransactions);
     } catch (error) {
       return res.status(400).send({ Message: error });
     }
@@ -133,15 +129,9 @@ export class TransactionsController {
       }
       const returnTransactions =
         await transactionService.getUserTransactionsByCashIn(account);
-      if (returnTransactions.length > 0) {
-        res.send(returnTransactions);
-      } else {
-        res.status(404).send({
-          Message: 'Não existe CashOuts realizados por esse usuário!',
-        });
-      }
+      res.send(returnTransactions);
     } catch (error) {
-      return res.status(400).send({ Message: error });
+      return res.status(404).send(getErrorMessage(error));
     }
   }
 
