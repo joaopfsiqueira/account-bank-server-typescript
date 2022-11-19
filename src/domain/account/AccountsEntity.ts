@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ColumnNumericTransformer } from '../../common/TransformersNumerics';
+import { Transactions } from '../transaction/TransactionsEntity';
 
 @Entity()
 export class Accounts {
@@ -14,4 +15,12 @@ export class Accounts {
     transformer: new ColumnNumericTransformer(),
   })
   balance: number;
+
+  @OneToMany(
+    () => Transactions,
+    (transaction) => {
+      transaction.creditedAccount, transaction.debitedAccount;
+    }
+  )
+  transaction: Transactions[];
 }
