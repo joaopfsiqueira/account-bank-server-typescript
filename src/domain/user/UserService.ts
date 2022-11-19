@@ -3,7 +3,7 @@ import {
   TransactionRepository,
 } from '../../repository/pgSQL/Repositories-pgSQL';
 import { Users } from './UsersEntity';
-import { AccountService } from '../account/AccountService';
+import * as AccountService from '../account/AccountService';
 import bcrypt = require('bcrypt');
 
 export async function findByUsername(username: string): Promise<Users> {
@@ -16,8 +16,7 @@ export async function createUser(
   username: string,
   password: string
 ): Promise<Users> {
-  const Account = new AccountService();
-  const newAccount = await Account.createAccount();
+  const newAccount = await AccountService.createAccount();
   const newUser = new Users(username, password, newAccount);
   newUser.password = bcrypt.hashSync(password, 10); //pass + saltRounds
   return await UserRepository.save(newUser);
