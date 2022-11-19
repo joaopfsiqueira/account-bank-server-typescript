@@ -74,11 +74,11 @@ export class TransactionsService {
     return formatedTransaction;
   }
 
-  public async getUserTransactionsByDate(date: String): Promise<Object[]> {
+  public async getUserTransactionsByDate(date: Date): Promise<Object[]> {
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: {
-        createdAt: LessThan('20/11/2022'),
+        createdAt: LessThan(date),
       },
     });
 

@@ -146,4 +146,25 @@ export class TransactionsController {
       return res.status(400).send({ Message: error });
     }
   }
+
+  public async transactionsDate(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    const { date } = req.body;
+
+    try {
+      const returnTransactions =
+        await transactionService.getUserTransactionsByDate(date);
+      if (returnTransactions.length > 0) {
+        res.send(returnTransactions);
+      } else {
+        res.status(404).send({
+          Message: 'Não existe CashOuts realizados por essa Data!',
+        });
+      }
+    } catch (error) {
+      return res.status(400).send({ Message: error });
+    }
+  }
 }
