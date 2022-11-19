@@ -17,3 +17,7 @@ TransactionRouter.post(
 );
 
 TransactionRouter.get('/user', TransactionController.transactions);
+TransactionRouter.get(
+  '/user/cashout',
+  TransactionController.transactionsCashOut
+);
