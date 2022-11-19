@@ -15,3 +15,5 @@ TransactionRouter.post(
   TransactionController.validateParamsTransaction,
   TransactionController.create
 );
+
+TransactionRouter.get('/user', TransactionController.transactions);
