@@ -19,10 +19,13 @@ export class UserService {
   }
 
   public async userBalance(username: string): Promise<number> {
-    const balance = await UserRepository.findOneBy({
-      username,
+    const balanceValue = await UserRepository.findOne({
+      relations: {
+        account: true,
+      },
+      where: [{ username }],
     });
 
-    return balance.account.balance;
+    return balanceValue.account.balance;
   }
 }

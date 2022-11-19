@@ -3,13 +3,13 @@
  */
 
 import { Request, Response } from 'express';
-import { UserSchema } from './UsersSchema';
+import { createUserSchema, balanceUserSchema } from './UsersSchema';
 import { UserService } from './UserService';
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
     try {
-      const validation = UserSchema.validate(req.body);
+      const validation = createUserSchema.validate(req.body);
       if (validation.error) {
         if (validation.error.details[0].type === 'string.pattern.base') {
           return res.status(400).send({
@@ -45,12 +45,18 @@ export default class UsersControllers {
   }
 
   public async balance(req: Request, res: Response): Promise<Response> {
-    const { username } = req.body;
+    let { username } = req.body;
 
     try {
+      const balanceValidation = balanceUserSchema.validate(req.body);
+      if (balanceValidation.error) {
+        return res.status(400).send({
+          Message: balanceValidation.error.message,
+        });
+      }
       const userService = new UserService();
-      const returnBalance = userService.userBalance(username);
-      res.send(returnBalance);
+      const returnBalance = await userService.userBalance(username);
+      res.send({ Saldo: `R$ ${returnBalance}` });
     } catch (error) {
       return res.status(400).json(error);
     }
