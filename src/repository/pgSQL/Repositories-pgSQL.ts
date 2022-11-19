@@ -4,5 +4,5 @@ import { AppDataSource } from '../../data-source';
 import { Users } from '../../domain/user/UsersEntity';
 
 export const AccountRepository = AppDataSource.getRepository(Accounts); //Conectando ao repository! Ou melhor, db!
-export const transactionRepository = AppDataSource.getRepository(Transactions);
+export const TransactionRepository = AppDataSource.getRepository(Transactions);
 export const UserRepository = AppDataSource.getRepository(Users);
