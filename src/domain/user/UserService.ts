@@ -28,16 +28,21 @@ export async function loginUser(
 ): Promise<Users> {
   try {
     const loginUser = await UserRepository.findOne({
-      where: [
-        {
-          username: username,
-        },
-        {
-          password: password,
-        },
-      ],
+      where: {
+        username: username,
+      },
     });
-    return loginUser;
+
+    if (!loginUser) {
+      throw new Error('Username incorreto!');
+    }
+
+    const isMatch = bcrypt.compareSync(password, loginUser.password);
+    if (isMatch) {
+      return loginUser;
+    } else {
+      throw new Error('Senha errada!');
+    }
   } catch (error) {
     throw error;
   }
