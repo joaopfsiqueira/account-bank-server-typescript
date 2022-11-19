@@ -15,6 +15,6 @@ export class UserService {
     const newAccount = await Account.createAccount();
     const newUser = new Users(username, password, newAccount);
     newUser.password = bcrypt.hashSync(password, 10); //pass + saltRounds
-    return UserRepository.save(newUser);
+    return await UserRepository.save(newUser);
   }
 }
