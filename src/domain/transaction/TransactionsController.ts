@@ -1,12 +1,10 @@
 import { Request, Response } from 'express';
-import { TransactionsService } from './TransactionsService';
+import * as transactionService from './TransactionsService';
 import { CheckBalance } from '../../common/CheckBalance';
 import {
   TransactionSchema,
   TransactionsUserSchema,
 } from './TransactionsSchema';
-
-const transactionService = new TransactionsService();
 
 export class TransactionsController {
   public async validateParamsTransaction(req: Request, res: Response, next) {
