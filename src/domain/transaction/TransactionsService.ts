@@ -8,7 +8,8 @@ import { Transactions } from './TransactionsEntity';
 import { Accounts } from '../account/AccountsEntity';
 import { Users } from '../user/UsersEntity';
 import { FormatTransaction } from '../../common/FormatTransaction';
-import { LessThan } from 'typeorm';
+import { Equal, LessThan, MoreThan } from 'typeorm';
+import { equal } from 'assert';
 
 export class TransactionsService {
   public async getCreditedAccount(creditedUsername: string): Promise<Users> {
@@ -78,10 +79,10 @@ export class TransactionsService {
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: {
-        createdAt: LessThan(date),
+        createdAt: MoreThan(date),
       },
     });
-
+    console.log(transactionsUser);
     const formatTransaction = new FormatTransaction();
     const formatedTransaction = formatTransaction.insert(transactionsUser);
 

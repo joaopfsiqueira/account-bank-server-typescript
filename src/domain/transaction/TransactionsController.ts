@@ -160,7 +160,7 @@ export class TransactionsController {
         res.send(returnTransactions);
       } else {
         res.status(404).send({
-          Message: 'Não existe CashOuts realizados por essa Data!',
+          Message: 'Não existe transações realizadas nessa Data!',
         });
       }
     } catch (error) {
