@@ -22,15 +22,18 @@ export async function createUser(
   return await UserRepository.save(newUser);
 }
 
-export async function loginUser(user: Users): Promise<Users> {
+export async function loginUser(
+  username: string,
+  password: string
+): Promise<Users> {
   try {
     const loginUser = await UserRepository.findOne({
       where: [
         {
-          username: user.username,
+          username: username,
         },
         {
-          password: user.password,
+          password: password,
         },
       ],
     });

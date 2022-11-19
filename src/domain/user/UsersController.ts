@@ -5,7 +5,6 @@
 import { Request, Response } from 'express';
 import { createUserSchema, balanceUserSchema } from './UsersSchema';
 import * as userService from './UserService';
-import { Transactions } from '../transaction/TransactionsEntity';
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
@@ -42,6 +41,14 @@ export default class UsersControllers {
     const newUser = await userService.createUser(username, password);
 
     return res.send(newUser);
+  }
+
+  public async login(req: Request, res: Response): Promise<Response> {
+    const { username, password } = req.body; // associação por desestruturação.
+
+    const login = userService.loginUser(username, password);
+
+    return res.send(login);
   }
 
   public async balance(req: Request, res: Response): Promise<Response> {
