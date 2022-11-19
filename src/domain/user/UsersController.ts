@@ -4,10 +4,8 @@
 
 import { Request, Response } from 'express';
 import { createUserSchema, balanceUserSchema } from './UsersSchema';
-import { UserService } from './UserService';
+import * as userService from './UserService';
 import { Transactions } from '../transaction/TransactionsEntity';
-
-const userService = new UserService();
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
