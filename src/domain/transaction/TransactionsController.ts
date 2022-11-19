@@ -107,7 +107,7 @@ export class TransactionsController {
 
       res.send(returnTransactions);
     } catch (error) {
-      return res.status(400).send({ Message: error });
+      return res.status(404).send(getErrorMessage(error));
     }
   }
 
@@ -144,15 +144,10 @@ export class TransactionsController {
     try {
       const returnTransactions =
         await transactionService.getUserTransactionsByDate(date);
-      if (returnTransactions.length > 0) {
-        res.send(returnTransactions);
-      } else {
-        res.status(404).send({
-          Message: 'Não existe transações realizadas nessa Data!',
-        });
-      }
+
+      res.send(returnTransactions);
     } catch (error) {
-      return res.status(400).send({ Message: error });
+      return res.status(404).send(getErrorMessage(error));
     }
   }
 }
