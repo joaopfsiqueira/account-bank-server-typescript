@@ -1,8 +1,24 @@
 import { Request, Response } from 'express';
 import { TransactionsService } from './TransactionsService';
 import { CheckBalance } from '../../common/checkBalance';
+import { TransactionSchema } from './TransactionsSchema';
 
 export class TransactionsController {
+  public async validateParamsTransaction(req: Request, res: Response, next) {
+    try {
+      const validation = TransactionSchema.validate(req.body);
+      if (validation.error) {
+        return res.status(400).send({
+          Message: validation.error.message,
+        });
+      }
+
+      next();
+    } catch (error) {
+      return res.status(400).json('Ocorreu um erro ao tentar transferir!');
+    }
+  }
+
   public async create(req: Request, res: Response): Promise<Response> {
     const { value, debitedAccount, creditedUsername } = req.body;
 
