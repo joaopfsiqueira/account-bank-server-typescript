@@ -1,13 +1,13 @@
 import { Router } from 'express'; //roteia as rotas, informa que tem algo acessando e ve se a rota que ele está tentando acessar existe.
-import UsersControllers from '../domain/user/UsersController';
+import { TransactionsController } from '../domain/transaction/TransactionsController';
 
 //exportando rota para utilizar no server.
-export const userRouter = Router();
+export const TransactionRouter = Router();
 
 //instânciando controllers
-const userController = new UsersControllers();
+const TransactionController = new TransactionsController();
 /**
  * Serviço para salvar um novo usuario.
  */
 
-userRouter.post('/', userController.validateParamsUser, userController.create);
+TransactionRouter.post('/', TransactionController.create);

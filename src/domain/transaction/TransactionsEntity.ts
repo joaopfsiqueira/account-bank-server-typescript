@@ -8,7 +8,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Accounts } from '../account/AccountsEntity';
-import { ColumnNumericTransformer } from '../../common/transformersNumerics';
+import { ColumnNumericTransformer } from '../../common/TransformersNumerics';
 
 @Entity()
 export class Transactions {

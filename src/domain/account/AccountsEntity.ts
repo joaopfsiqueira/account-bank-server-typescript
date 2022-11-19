@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { ColumnNumericTransformer } from '../../common/transformersNumerics';
+import { ColumnNumericTransformer } from '../../common/TransformersNumerics';
 
 @Entity()
 export class Accounts {

@@ -1,9 +1,9 @@
 import { app } from './app';
-import { userRouter } from './routes/users.routes';
-import { transactionRouter } from './routes/transactions.routes';
+import { UserRouter } from './routes/Users.routes';
+import { TransactionRouter } from './routes/Transactions.routes';
 
-app.use('/usuarios', userRouter);
-app.use('/transactions', transactionRouter);
+app.use('/usuarios', UserRouter);
+app.use('/transactions', TransactionRouter);
 
 app.listen(process.env.PORT, () =>
   console.log(`App ouvindo na porta ${process.env.PORT}`)
