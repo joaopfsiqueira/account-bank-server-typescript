@@ -1,10 +1,8 @@
-import {
-  UserRepository,
-  TransactionRepository,
-} from '../../repository/pgSQL/Repositories-pgSQL';
+import { UserRepository } from '../../repository/pgSQL/Repositories-pgSQL';
 import { Users } from './UsersEntity';
 import * as AccountService from '../account/AccountService';
 import bcrypt = require('bcrypt');
+import { balanceUserSchema } from './UsersSchema';
 
 export async function findByUsername(username: string): Promise<Users> {
   return await UserRepository.findOneBy({
@@ -57,12 +55,15 @@ export async function loginUser(
 }
 
 export async function userBalance(username: string): Promise<number> {
-  const balanceValue = await UserRepository.findOne({
-    relations: {
-      account: true,
-    },
-    where: [{ username }],
-  });
-
-  return balanceValue.account.balance;
+  try {
+    const balanceValue = await UserRepository.findOne({
+      relations: {
+        account: true,
+      },
+      where: [{ username }],
+    });
+    return balanceValue.account.balance;
+  } catch (error) {
+    throw new Error('Usuário não localizado!');
+  }
 }

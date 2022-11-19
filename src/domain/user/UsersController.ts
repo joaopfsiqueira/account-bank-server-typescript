@@ -57,6 +57,7 @@ export default class UsersControllers {
     const { username } = req.body;
 
     try {
+      //validando parametros pelo metodo validate do joi.
       const balanceValidation = balanceUserSchema.validate(req.body);
       if (balanceValidation.error) {
         return res.status(400).send({
@@ -66,7 +67,7 @@ export default class UsersControllers {
       const returnBalance = await userService.userBalance(username);
       res.send({ Saldo: `R$ ${returnBalance}` });
     } catch (error) {
-      return res.status(400).send({ Message: error });
+      return res.status(404).send(getErrorMessage(error));
     }
   }
 }
