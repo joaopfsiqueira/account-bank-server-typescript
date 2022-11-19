@@ -1,4 +1,4 @@
-import { UserRepository } from '../../repository/pgSQL/UserRepository-pgSQL';
+import { UserRepository } from '../../repository/pgSQL/Repositories-pgSQL';
 import { Users } from './UsersEntity';
 import { AccountService } from '../account/AccountService';
 import bcrypt = require('bcrypt');
