@@ -11,3 +11,4 @@ const UserController = new UsersControllers();
  */
 
 UserRouter.post('/', UserController.validateParamsUser, UserController.create);
+UserRouter.get('/balance', UserController.balance);
