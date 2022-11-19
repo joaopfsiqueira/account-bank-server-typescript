@@ -62,15 +62,4 @@ export default class UsersControllers {
       return res.status(400).send({ Message: error });
     }
   }
-
-  public async transactions(req: Request, res: Response): Promise<Response> {
-    const { account } = req.body;
-
-    try {
-      const returnTransactions = await userService.userTransactions(account);
-      res.send(returnTransactions);
-    } catch (error) {
-      return res.status(400).send({ Message: error });
-    }
-  }
 }

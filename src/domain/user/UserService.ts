@@ -33,15 +33,4 @@ export class UserService {
 
     return balanceValue.account.balance;
   }
-  public async userTransactions(account: Accounts): Promise<Transactions> {
-    const userTransactions = await TransactionRepository.findOne({
-      relations: {
-        debitedAccount: true,
-        creditedAccount: true,
-      },
-      where: [{ creditedAccount: account, debitedAccount: account }],
-    });
-
-    return userTransactions;
-  }
 }
