@@ -5,6 +5,9 @@
 import { Request, Response } from 'express';
 import { createUserSchema, balanceUserSchema } from './UsersSchema';
 import { UserService } from './UserService';
+import { Transactions } from '../transaction/TransactionsEntity';
+
+const userService = new UserService();
 
 export default class UsersControllers {
   public async validateParamsUser(req: Request, res: Response, next) {
@@ -33,7 +36,6 @@ export default class UsersControllers {
   public async create(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
 
-    const userService = new UserService();
     if (await userService.findByUsername(username))
       return res.status(400).send({
         Message: 'Username já cadastrado!',
@@ -45,7 +47,7 @@ export default class UsersControllers {
   }
 
   public async balance(req: Request, res: Response): Promise<Response> {
-    let { username } = req.body;
+    const { username } = req.body;
 
     try {
       const balanceValidation = balanceUserSchema.validate(req.body);
@@ -54,11 +56,21 @@ export default class UsersControllers {
           Message: balanceValidation.error.message,
         });
       }
-      const userService = new UserService();
       const returnBalance = await userService.userBalance(username);
       res.send({ Saldo: `R$ ${returnBalance}` });
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).send({ Message: error });
+    }
+  }
+
+  public async transactions(req: Request, res: Response): Promise<Response> {
+    const { account } = req.body;
+
+    try {
+      const returnTransactions = await userService.userTransactions(account);
+      res.send(returnTransactions);
+    } catch (error) {
+      return res.status(400).send({ Message: error });
     }
   }
 }
