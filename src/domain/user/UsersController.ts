@@ -52,7 +52,7 @@ export default class UsersControllers {
       console.log(login);
       return res.send(login);
     } catch (error) {
-      return res.status(500).send(getErrorMessage(error));
+      return res.status(404).send(getErrorMessage(error));
     }
   }
 
