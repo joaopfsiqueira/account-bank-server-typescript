@@ -6,6 +6,6 @@ export const TransactionSchema = Joi.object({
   creditedUsername: Joi.string().required().min(3),
 });
 
-export const TransactionsUser = Joi.object({
+export const TransactionsUserSchema = Joi.object({
   account: Joi.number().required(),
 });

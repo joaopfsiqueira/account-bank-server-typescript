@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
 import { TransactionsService } from './TransactionsService';
 import { CheckBalance } from '../../common/CheckBalance';
-import { TransactionSchema } from './TransactionsSchema';
+import {
+  TransactionSchema,
+  TransactionsUserSchema,
+} from './TransactionsSchema';
 
 const transactionService = new TransactionsService();
 
@@ -60,6 +63,15 @@ export class TransactionsController {
     const { account } = req.body;
 
     try {
+      const userTransactionsValidation = TransactionsUserSchema.validate(
+        req.body
+      );
+
+      if (userTransactionsValidation.error) {
+        return res.status(400).send({
+          Message: userTransactionsValidation.error.message,
+        });
+      }
       const returnTransactions = await transactionService.getUserTransactions(
         account
       );
@@ -82,6 +94,15 @@ export class TransactionsController {
     const { account } = req.body;
 
     try {
+      const userTransactionsValidation = TransactionsUserSchema.validate(
+        req.body
+      );
+
+      if (userTransactionsValidation.error) {
+        return res.status(400).send({
+          Message: userTransactionsValidation.error.message,
+        });
+      }
       const returnTransactions =
         await transactionService.getUserTransactionsByCashOut(account);
       if (returnTransactions.length > 0) {
@@ -103,6 +124,15 @@ export class TransactionsController {
     const { account } = req.body;
 
     try {
+      const userTransactionsValidation = TransactionsUserSchema.validate(
+        req.body
+      );
+
+      if (userTransactionsValidation.error) {
+        return res.status(400).send({
+          Message: userTransactionsValidation.error.message,
+        });
+      }
       const returnTransactions =
         await transactionService.getUserTransactionsByCashIn(account);
       if (returnTransactions.length > 0) {
