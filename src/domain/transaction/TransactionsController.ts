@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { TransactionsService } from './TransactionsService';
+import { CheckBalance } from '../../common/checkBalance';
 
 export class TransactionsController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -10,17 +11,25 @@ export class TransactionsController {
       creditedUsername
     );
 
-    if (creditedUsernameAccount) {
-      const newTransaction = await transactionService.createTransaction(
-        value,
-        debitedAccount,
-        creditedUsernameAccount
-      );
+    const balance = new CheckBalance();
+    const haveBalance = await balance.CheckUserBalance(debitedAccount, value);
+    if (haveBalance === true) {
+      if (creditedUsernameAccount) {
+        const newTransaction = await transactionService.createTransaction(
+          value,
+          debitedAccount,
+          creditedUsernameAccount
+        );
 
-      return res.send(newTransaction);
+        return res.send(newTransaction);
+      } else {
+        return res.status(400).send({
+          Message: 'Usuário não localizado!',
+        });
+      }
     } else {
       return res.status(400).send({
-        Message: 'Usuário não localizado!',
+        Message: 'Saldo insuficiente!',
       });
     }
   }
