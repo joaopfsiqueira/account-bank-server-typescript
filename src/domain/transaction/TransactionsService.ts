@@ -7,6 +7,7 @@ import {
 import { Transactions } from './TransactionsEntity';
 import { Accounts } from '../account/AccountsEntity';
 import { Users } from '../user/UsersEntity';
+import { FormatTransaction } from '../../common/FormatTransaction';
 
 export class TransactionsService {
   public async getCreditedAccount(creditedUsername: string): Promise<Users> {
@@ -47,5 +48,28 @@ export class TransactionsService {
     await AccountRepository.save(updateCreditedAccount);
     await AccountRepository.save(updateDebitedAccount);
     return await TransactionRepository.save(newTransaction);
+  }
+
+  public async userTransactions(account: number): Promise<Object[]> {
+    const transactionsUser = await TransactionRepository.find({
+      relations: ['debitedAccount', 'creditedAccount'],
+      where: [
+        {
+          debitedAccount: {
+            id: account,
+          },
+        },
+        {
+          creditedAccount: {
+            id: account,
+          },
+        },
+      ],
+    });
+
+    const formatTransaction = new FormatTransaction();
+    const formatedTransaction = formatTransaction.insert(transactionsUser);
+
+    return formatedTransaction;
   }
 }
