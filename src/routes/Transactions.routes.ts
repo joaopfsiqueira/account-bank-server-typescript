@@ -23,3 +23,4 @@ TransactionRouter.get(
 );
 
 TransactionRouter.get('/user/cashin', TransactionController.transactionsCashIn);
+TransactionRouter.get('/user/bydate', TransactionController.transactionsDate);
