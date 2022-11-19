@@ -17,4 +17,12 @@ export class UserService {
     newUser.password = bcrypt.hashSync(password, 10); //pass + saltRounds
     return await UserRepository.save(newUser);
   }
+
+  public async userBalance(username: string): Promise<number> {
+    const balance = await UserRepository.findOneBy({
+      username,
+    });
+
+    return balance.account.balance;
+  }
 }

@@ -43,4 +43,16 @@ export default class UsersControllers {
 
     return res.send(newUser);
   }
+
+  public async balance(req: Request, res: Response): Promise<Response> {
+    const { username } = req.body;
+
+    try {
+      const userService = new UserService();
+      const returnBalance = userService.userBalance(username);
+      res.send(returnBalance);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  }
 }
