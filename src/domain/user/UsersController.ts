@@ -33,15 +33,13 @@ export default class UsersControllers {
 
   public async create(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
+    try {
+      const newUser = await userService.createUser(username, password);
 
-    if (await userService.findByUsername(username))
-      return res.status(400).send({
-        Message: 'Username já cadastrado!',
-      });
-
-    const newUser = await userService.createUser(username, password);
-
-    return res.send(newUser);
+      return res.send(newUser);
+    } catch (error) {
+      return res.status(400).send(getErrorMessage(error));
+    }
   }
 
   public async login(req: Request, res: Response): Promise<Response> {
@@ -49,7 +47,6 @@ export default class UsersControllers {
 
     try {
       const login = await userService.loginUser(username, password);
-      console.log(login);
       return res.send(login);
     } catch (error) {
       return res.status(404).send(getErrorMessage(error));

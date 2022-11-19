@@ -16,10 +16,18 @@ export async function createUser(
   username: string,
   password: string
 ): Promise<Users> {
-  const newAccount = await AccountService.createAccount();
-  const newUser = new Users(username, password, newAccount);
-  newUser.password = bcrypt.hashSync(password, 10); //pass + saltRounds
-  return await UserRepository.save(newUser);
+  try {
+    if (await this.findByUsername(username)) {
+      throw new Error('Usuario já cadastrado!');
+    } else {
+      const newAccount = await AccountService.createAccount();
+      const newUser = new Users(username, password, newAccount);
+      newUser.password = bcrypt.hashSync(password, 10); //pass + saltRounds
+      return await UserRepository.save(newUser);
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function loginUser(
