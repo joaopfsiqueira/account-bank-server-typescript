@@ -1,10 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as transactionService from './TransactionsService';
 
-import {
-  TransactionSchema,
-  TransactionsUserSchema,
-} from './TransactionsSchema';
+import { TransactionSchema } from './TransactionsSchema';
 import { getErrorMessage } from '../../common/GetErrorMessage';
 
 export class TransactionsController {
