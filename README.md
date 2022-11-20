@@ -14,7 +14,7 @@ Frameworks, pacotes e linguagens utilizadas:
 - [bcrypt](https://www.npmjs.com/package/bcrypt) - Bcrypt é um método de criptografia do tipo hash, utilizo para criptografar alguns dados antes de jogar no bd!
 - [morgan](https://www.npmjs.com/package/morgan) - Gera logs detalhados.
 - [express](https://expressjs.com/pt-br/4x/api.html) - Utizado para rodar nosso servidor.
-- [@hapi/joi](https://www.npmjs.com/package/@hapi/joi) - Validar parâmetros recebidos pelo body.
+- [Joi](https://www.npmjs.com/package/@hapi/joi) - Validar parâmetros recebidos pelo body.
 - [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
 - [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) -  Dentro do *tsconfig.json*, em `target` e `lib: []`, estou utilizado o ES2021!
 
