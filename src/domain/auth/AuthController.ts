@@ -13,6 +13,7 @@ export default class AuthController {
         expiresIn: '1d',
       });
 
+      delete user.password;
       return res.json({
         user,
         token,
