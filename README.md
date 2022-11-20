@@ -171,3 +171,22 @@ CMD npm run start
 
 - O docker-compose.yml ´´e o arquivo que define serviços, rede e volumes para uma Docker Application.
 - De outra forma, é lá que configuramos os nosso containers, as imagens que vão rodar nele, as portas, seus nomes, os volumes onde vão salvar suas informações para não perder! Entre outros exemplos.
+
+- Nesse meu exemplo, estou utilizando a versão 3.8 do docker-compose, e estou subindo 2 containers, ou melhor, 2 serviços.
+- Um deles é a api que eu criei, que depende da criação do serviço **db**, onde o postgres está! Como estou criando os 2 containers juntos, eles já são criados na mesma rede em modo bridge, e por conta disso, minha api acessa localmente o PostgreSql através do host: "postgres" (nome do container do postgress).
+
+Caso queira entender como está a rede, rode o comando:
+
+```
+docker network ls
+```
+
+Depois anote o networkid da rede que está em primeiro, ela é a rede criada pelo docker para armazenar os dois containers criados!
+
+```
+docker network inspect networkId
+```
+
+Dentro, vai ter os dois containers com ipv4 subsequente!
+
+- Dentro do arquivo tem variáveis que retornam do .env, sim! O docker-compose-yml entende o .env do seu projeto! Por isso eu sugeri que o .env fosse criado, é necessário as variáveis que estão nele dentro daquele formato que eu passei para criar um container!
