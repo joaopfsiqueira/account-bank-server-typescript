@@ -1,18 +1,18 @@
-# Installs Node.js image
+# Instala a imagem Node.js na minha imagem!
 FROM node:18.12.1-alpine3.16
 
-# sets the working directory for any RUN, CMD, COPY command
-# all files we put in the Docker container running the server will be in /usr/src/app (e.g. /usr/src/app/package.json)
+# define o diretório de trabalho para qualquer comando RUN, CMD, COPY
+# os arquivos que colocamos no contêiner do Docker executando o servidor estarão em:
 WORKDIR /usr/src/server
 
-# Copies package.json, package-lock.json, tsconfig.json, .env to the root of WORKDIR
+# Copia package.json, package-lock.json, tsconfig.json, .env para a raiz de WORKDIR
 COPY ["package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
 
-# Copies everything in the src directory to WORKDIR/src
+# Copia tudo do diretório src para WORKDIR/src
 COPY ./src ./src
 
-# Installs all packages
+# Instala todos os pacotes no container
 RUN npm install
 
-# Runs the dev npm script to build & start the server
+# Vai rodar o comando npm start, assim que nosso container criar a api já vai passar a rodar, sem necessitar de um npm start!
 CMD npm run start

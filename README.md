@@ -19,11 +19,11 @@ Frameworks, pacotes e linguagens utilizadas:
 - [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
 - [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) - Dentro do _tsconfig.json_, em `target` e `lib: []`, estou utilizado o ES2021!
 
-## 🚀 Começando
+# 🚀 Começando
 
 Consulte **[Instalação](#-instala%C3%A7%C3%A3o)** para saber como implantar o projeto.
 
-### 📋 Pré-requisitos
+## 📋 Pré-requisitos
 
 De que coisas você precisa para rodar o server?
 
@@ -59,7 +59,7 @@ node -v
 
 ### **[Instalação NVM Windows](https://github.com/coreybutler/nvm-windows)**
 
-### 🔧 Instalação
+# 🔧 Instalação
 
 1. Run `npm i` command
 2. Crie um arquivo _.env_ no diretório inicial do projeto com o seguinte modelo:
@@ -81,7 +81,7 @@ SECRET_KEY='Sua Secret Key'
 4. Rode o comando que eu criei `make up`, esse comando vai realizar um docker compose up -d, já liberando o terminal para uso!
 5. Pronto! Agora certifique-se de que os containers estão rodando com um `docker container ls -a`!
 
-### 🔧 Utilização
+# 🔧 Utilização
 
 - Importe no seu postman as collection que eu deixei no repositório junto das variáveis globais do postman! Ambos estão prontos para uso.
 
@@ -101,3 +101,73 @@ SECRET_KEY='Sua Secret Key'
 │   ├── routes - rotas do projeto
 
 ```
+
+# 🗝️ Secret Key
+
+- A secret key é uma .env que eu criei, que basicamente armazena um código. Esse código é utilizado para criar a JWT! Basicamente é enviada como parametro junto de outros dados que são armazenados dentro do token gerado. É importante ter uma _Secret Key_ para segurança do projeto. Utilizada para incrementar ainda mais o token e utilizar como validação. Dito isso, recomendo gerar sua Secret Key no seguinte site: https://randomkeygen.com/
+
+1. Abra o site https://randomkeygen.com/
+2. Desça a tela até as keys _CodeIgniter Encryption Keys_
+3. Escolha uma, copie e salve dentro de `SECRET_KEY` no seu _.env_
+
+# Explicando Docker Compose Yml e Docker File
+
+## Docker File
+
+- O Docker file é responsável pela criação de uma imagem no docker. No caso desse projeto, precisei utilizar o docker file para criar uma imagem da minha **API**!
+- Dito isso, dentro dele coloquei as instruções que eu quero para a minha imagem! É o jeito mais fácil para automatizar a criação de imagens.
+
+Segue uma explicação do arquivo:
+
+Instala a imagem Node.js na minha imagem!
+
+```
+FROM node:18.12.1-alpine3.16
+```
+
+Define o diretório de trabalho para qualquer comando RUN, CMD, COPY
+Os arquivos que colocamos no contêiner do Docker executando o servidor estarão em:
+
+```
+WORKDIR /usr/src/server
+```
+
+Copia package.json, package-lock.json, tsconfig.json, .env para a raiz de WORKDIR
+
+```
+COPY ["package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
+```
+
+Copia tudo do diretório src para WORKDIR/src
+
+```
+COPY ./src ./src
+```
+
+Instala todos os pacotes no container
+
+```
+RUN npm install
+```
+
+Vai rodar o comando npm start, assim que nosso container criar a api já vai passar a rodar, sem necessitar de um npm start!
+
+```
+CMD npm run start
+```
+
+### Arquivo total:
+
+```
+FROM node:18.12.1-alpine3.16
+WORKDIR /usr/src/server
+COPY ["package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
+COPY ./src ./src
+RUN npm install
+CMD npm run start
+```
+
+## Docker Compose Yml
+
+- O docker-compose.yml ´´e o arquivo que define serviços, rede e volumes para uma Docker Application.
+- De outra forma, é lá que configuramos os nosso containers, as imagens que vão rodar nele, as portas, seus nomes, os volumes onde vão salvar suas informações para não perder! Entre outros exemplos.

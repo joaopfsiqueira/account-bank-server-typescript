@@ -13,19 +13,15 @@ services:
 
   db:
     container_name: postgres
-    # restart: always
+    restart: always
     image: 'postgres:latest'
-    # expose:
-    #   - ${DB_PORT}
     ports:
       - 5432:${DB_PORT}
-    # volumes:
-    #   - ./pgdata:/var/lib/postgresql/data #persistindo dados para quando derrubar container não apagar os arquivos.
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data #persistindo dados para quando derrubar container não apagar os arquivos.
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
-    # command: -p ${DB_PORT}
 
-volumes:
-  data: {}
+volumes: pgdata
