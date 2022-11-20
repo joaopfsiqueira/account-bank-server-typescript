@@ -81,11 +81,9 @@ SECRET_KEY='Sua Secret Key'
 4. Rode o comando que eu criei `make up`, esse comando vai realizar um docker compose up -d, já liberando o terminal para uso!
 5. Pronto! Agora certifique-se de que os containers estão rodando com um `docker container ls -a`!
 
-# 🔧 Utilização
+6. **IMPORTANTE!** Importe no seu postman as collection que eu deixei no repositório junto das variáveis globais do postman! Ambos estão prontos para uso e com exemplo de cada erro, sucesso ou problema!
 
-- Importe no seu postman as collection que eu deixei no repositório junto das variáveis globais do postman! Ambos estão prontos para uso.
-
-### 📚 Pastas (Server)
+# 📚 Pastas (Server)
 
 ```
 ├── src - App, server e data-source
