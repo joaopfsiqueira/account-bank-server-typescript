@@ -17,7 +17,7 @@ export default function AuthMiddleware(
 
   //se não houver
   if (!authorization) {
-    return res.status(401).send('Unauthorized');
+    return res.status(401).send('Token não é válido!');
   }
 
   //pegando o token do request.
