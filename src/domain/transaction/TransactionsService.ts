@@ -7,7 +7,7 @@ import {
 import { Transactions } from './TransactionsEntity';
 import { Accounts } from '../account/AccountsEntity';
 import { Users } from '../user/UsersEntity';
-import { FormatTransaction } from '../../common/FormatTransaction';
+import * as formatTransaction from '../../common/FormatTransaction';
 import { MoreThan } from 'typeorm';
 import * as balance from '../../common/CheckBalance';
 
@@ -110,7 +110,6 @@ export async function getUserTransactions(account: number): Promise<Object[]> {
       ],
     });
     if (transactionsUser.length > 0) {
-      const formatTransaction = new FormatTransaction();
       const formatedTransaction = formatTransaction.insert(transactionsUser);
 
       return formatedTransaction;
@@ -132,7 +131,6 @@ export async function getUserTransactionsByDate(date: Date): Promise<Object[]> {
     });
 
     if (transactionsUser.length > 0) {
-      const formatTransaction = new FormatTransaction();
       const formatedTransaction = formatTransaction.insert(transactionsUser);
       return formatedTransaction;
     } else {
@@ -157,7 +155,6 @@ export async function getUserTransactionsByCashOut(
     });
 
     if (transactionsUser.length > 0) {
-      const formatTransaction = new FormatTransaction();
       const formatedTransaction = formatTransaction.insert(transactionsUser);
 
       return formatedTransaction;
@@ -183,7 +180,6 @@ export async function getUserTransactionsByCashIn(
     });
 
     if (transactionsUser.length > 0) {
-      const formatTransaction = new FormatTransaction();
       const formatedTransaction = formatTransaction.insert(transactionsUser);
 
       return formatedTransaction;
