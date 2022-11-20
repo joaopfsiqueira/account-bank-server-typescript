@@ -10,7 +10,3 @@ export const createUserSchema = Joi.object({
       )
     ),
 });
-
-export const balanceUserSchema = Joi.object({
-  username: Joi.string().required().min(3),
-});
