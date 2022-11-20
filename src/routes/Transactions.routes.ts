@@ -1,6 +1,6 @@
 import { Router } from 'express'; //roteia as rotas, informa que tem algo acessando e ve se a rota que ele está tentando acessar existe.
 import { TransactionsController } from '../domain/transaction/TransactionsController';
-
+import AuthMiddleware from '../middlewares/AuthMiddleware';
 //exportando rota para utilizar no server.
 export const TransactionRouter = Router();
 
@@ -12,6 +12,7 @@ const TransactionController = new TransactionsController();
 
 TransactionRouter.post(
   '/',
+  AuthMiddleware,
   TransactionController.validateParamsTransaction,
   TransactionController.create
 );
