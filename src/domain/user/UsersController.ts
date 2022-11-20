@@ -3,7 +3,7 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-import { createUserSchema, balanceUserSchema } from './UsersSchema';
+import { createUserSchema } from './UsersSchema';
 import * as userService from './UserService';
 import { getErrorMessage } from '../../common/GetErrorMessage';
 
@@ -47,16 +47,9 @@ export default class UsersControllers {
   }
 
   public async balance(req: Request, res: Response): Promise<Response> {
-    const { username } = req.body;
-
+    const username = req.username;
     try {
       //validando parametros pelo metodo validate do joi.
-      const balanceValidation = balanceUserSchema.validate(req.body);
-      if (balanceValidation.error) {
-        return res.status(400).send({
-          Message: balanceValidation.error.message,
-        });
-      }
       const returnBalance = await userService.userBalance(username);
       res.send({ Saldo: `R$ ${returnBalance}` });
     } catch (error) {

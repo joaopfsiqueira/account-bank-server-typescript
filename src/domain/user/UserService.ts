@@ -33,7 +33,7 @@ export async function userBalance(username: string): Promise<number> {
       relations: {
         account: true,
       },
-      where: [{ username }],
+      where: { username },
     });
     return balanceValue.account.balance;
   } catch (error) {
