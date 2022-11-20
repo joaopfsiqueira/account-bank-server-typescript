@@ -11,7 +11,7 @@ import * as balance from '../../common/CheckBalance';
 import * as formatNewTransaction from '../../common/FormatReturnCreateTransaction';
 import { MoreThan } from 'typeorm';
 
-export async function getDebittedAccount(username: string): Promise<number> {
+export async function getAccount(username: string): Promise<number> {
   //não é preciso try cat, uma vez que para chegar aqui, os erros estão sendo tratados no middleware de auth.
   const debitedIdAccount = await UserRepository.findOne({
     relations: {
@@ -51,7 +51,7 @@ export async function createTransaction(
 ): Promise<Object> {
   //pegando a account do username que vai receber a transferência!
   try {
-    const debitedAccount = await this.getDebittedAccount(username);
+    const debitedAccount = await this.getAccount(username);
     const creditedUsernameAccount = await this.getCreditedAccount(
       creditedUsername
     );
@@ -99,8 +99,9 @@ export async function createTransaction(
   }
 }
 
-export async function getUserTransactions(account: number): Promise<Object[]> {
+export async function getUserTransactions(username: string): Promise<Object[]> {
   try {
+    const account = await this.getAccount(username);
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: [

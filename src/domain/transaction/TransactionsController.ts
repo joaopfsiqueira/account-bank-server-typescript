@@ -45,7 +45,7 @@ export class TransactionsController {
   }
 
   public async transactions(req: Request, res: Response): Promise<Response> {
-    const { account } = req.body;
+    const username = req.username;
 
     try {
       const userTransactionsValidation = TransactionsUserSchema.validate(
@@ -58,7 +58,7 @@ export class TransactionsController {
         });
       }
       const returnTransactions = await transactionService.getUserTransactions(
-        account
+        username
       );
       res.send(returnTransactions);
     } catch (error) {
