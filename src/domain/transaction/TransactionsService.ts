@@ -8,8 +8,8 @@ import { Transactions } from './TransactionsEntity';
 import { Users } from '../user/UsersEntity';
 import * as formatTransaction from '../../common/FormatTransaction';
 import * as balance from '../../common/CheckBalance';
-import * as formatNewTransaction from '../../common/FormatReturnCreateTransaction';
 import { MoreThan } from 'typeorm';
+import { resolve } from 'path';
 
 export async function getAccount(username: string): Promise<number> {
   //não é preciso try cat, uma vez que para chegar aqui, os erros estão sendo tratados no middleware de auth.
@@ -78,14 +78,8 @@ export async function createTransaction(
 
         await AccountRepository.save(updateCreditedAccount);
         await AccountRepository.save(updateDebitedAccount);
-        const createdTransaction = await TransactionRepository.save(
-          newTransaction
-        );
-        const formatedNewTransaction = await formatNewTransaction.format(
-          createdTransaction
-        );
 
-        return formatedNewTransaction;
+        return await TransactionRepository.save(newTransaction);
       } else {
         throw new Error(
           'Ops! Não é possível transferir para sua própria conta!'
