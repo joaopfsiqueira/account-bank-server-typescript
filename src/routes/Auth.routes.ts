@@ -2,7 +2,7 @@ import { Router } from 'express'; //roteia as rotas, informa que tem algo acessa
 import AuthController from '../domain/auth/AuthController';
 
 //exportando rota para utilizar no server.
-export const UserRouter = Router();
+export const AuthRouter = Router();
 
 //instânciando controllers
 const authController = new AuthController();
@@ -10,4 +10,4 @@ const authController = new AuthController();
  * Serviço para salvar um novo usuario.
  */
 
-UserRouter.post('/', authController.login);
+AuthRouter.post('/', authController.login);
