@@ -18,7 +18,6 @@ Frameworks, pacotes e linguagens utilizadas:
 - [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
 - [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) -  Dentro do *tsconfig.json*, em `target` e `lib: []`, estou utilizado o ES2021!
 
-Projeto 
 
 ## 🚀 Começando
 
