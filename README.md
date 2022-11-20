@@ -2,7 +2,8 @@
 
 Crição de conta bancária!
 
-Frameworks, pacotes e linguagens utilizadas: 
+Frameworks, pacotes e linguagens utilizadas:
+
 - [Typescript](https://www.typescriptlang.org/) - Linguagem de programação utilizada, JavaScript com tipagem estática opcional à linguagem.
 - [NodeJs](https://nodejs.org/en/) - Software/Interpretador utilizado para rodar código TypesScript/JavaScript fora da Web.
 - [Docker](https://docs.docker.com/compose/) - Utilizado para **[Dockerizar](https://medium.com/trainingcenter/dockerizando-sua-aplica%C3%A7%C3%A3o-e18969613f4b)** minha aplicação, onde subi minha api e meu banco de dados!
@@ -16,8 +17,7 @@ Frameworks, pacotes e linguagens utilizadas:
 - [express](https://expressjs.com/pt-br/4x/api.html) - Utizado para rodar nosso servidor.
 - [Joi](https://www.npmjs.com/package/@hapi/joi) - Validar parâmetros recebidos pelo body.
 - [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
-- [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) -  Dentro do *tsconfig.json*, em `target` e `lib: []`, estou utilizado o ES2021!
-
+- [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) - Dentro do _tsconfig.json_, em `target` e `lib: []`, estou utilizado o ES2021!
 
 ## 🚀 Começando
 
@@ -62,7 +62,7 @@ node -v
 ### 🔧 Instalação
 
 1. Run `npm i` command
-2. Crie um arquivo _.env_ com o seguinte modelo:
+2. Crie um arquivo _.env_ no diretório inicial do projeto com o seguinte modelo:
 
 ```
 DB_USER='postgres'
@@ -83,6 +83,21 @@ SECRET_KEY='Sua Secret Key'
 
 ### 🔧 Utilização
 
-- Exporte a collection do postman que eu deixei no repositório junto das variáveis globais do postman! Ambos estão prontos para uso
+- Importe no seu postman as collection que eu deixei no repositório junto das variáveis globais do postman! Ambos estão prontos para uso.
 
-typeorm init --name account-bank-fullstack-typescript --database postgres
+### 📚 Pastas (Server)
+
+```
+├── src - App, server e data-source
+│   ├── @types - Aprimorando alguma interface já existente
+│   ├── common - Funções globais, comuns.
+│   ├── Domain
+│        ├── account - Controller, service, schema e entity que envolve account.
+│        ├── auth - Controller, service, schema e entity que envolve auth.
+│        ├── transaction - Controller, service, schema e entity que envolve transaction
+│        ├── user - Controller, service, schema e entity que envolve user.
+│   ├── middleware - Todos os middleware do projeto.
+│   ├── repository - crição de repository, conexão com as tabelas.
+│   ├── routes - rotas do projeto
+
+```
