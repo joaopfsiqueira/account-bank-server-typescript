@@ -9,9 +9,13 @@ export default class AuthController {
 
     try {
       const user = await authService.loginUser(username, password);
-      const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
-        expiresIn: '1d',
-      });
+      const token = jwt.sign(
+        { username: user.username },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: '1d',
+        }
+      );
 
       delete user.password;
       return res.json({
