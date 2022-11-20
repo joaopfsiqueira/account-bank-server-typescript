@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { request } from 'http';
 import * as jwt from 'jsonwebtoken';
 
 // criando interface para o retorno do "Data" mais abaixo
@@ -17,7 +18,7 @@ export default function AuthMiddleware(
 
   //se não houver
   if (!authorization) {
-    return res.status(401).send('Token não é válido!');
+    return res.status(401).send({ Message: 'Token não é válido!' });
   }
 
   //pegando o token do request.
@@ -25,13 +26,13 @@ export default function AuthMiddleware(
 
   try {
     const data = jwt.verify(token, process.env.SECRET_KEY); //comparando token depois de descripitografar o token com a nossa secret.
+
     const { username } = data as TokenPayload; // criamos uma interface para esse payload.
 
     // foi preciso criar um tipo customizavel dentro do req do express. @types/
     req.username = username;
-
     return next();
   } catch {
-    return res.status(401).send('Unauthorized');
+    return res.status(401).send({ Message: 'Token expirado!' });
   }
 }
