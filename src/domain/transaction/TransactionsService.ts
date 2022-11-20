@@ -170,9 +170,10 @@ export async function getUserTransactionsByCashOut(
 }
 
 export async function getUserTransactionsByCashIn(
-  account: number
+  username: string
 ): Promise<Object[]> {
   try {
+    const account = await this.getAccount(username);
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: {
