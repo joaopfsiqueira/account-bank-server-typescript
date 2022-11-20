@@ -5,11 +5,11 @@ import {
 } from '../../repository/pgSQL/Repositories-pgSQL';
 
 import { Transactions } from './TransactionsEntity';
-import { Accounts } from '../account/AccountsEntity';
 import { Users } from '../user/UsersEntity';
 import * as formatTransaction from '../../common/FormatTransaction';
-import { MoreThan } from 'typeorm';
 import * as balance from '../../common/CheckBalance';
+import * as formatNewTransaction from '../../common/FormatReturnCreateTransaction';
+import { MoreThan } from 'typeorm';
 
 export async function getDebittedAccount(username: string): Promise<number> {
   //não é preciso try cat, uma vez que para chegar aqui, os erros estão sendo tratados no middleware de auth.
@@ -48,7 +48,7 @@ export async function createTransaction(
   value: number,
   username: string,
   creditedUsername: string
-): Promise<Transactions> {
+): Promise<Object> {
   //pegando a account do username que vai receber a transferência!
   try {
     const debitedAccount = await this.getDebittedAccount(username);
@@ -78,7 +78,14 @@ export async function createTransaction(
 
         await AccountRepository.save(updateCreditedAccount);
         await AccountRepository.save(updateDebitedAccount);
-        return await TransactionRepository.save(newTransaction);
+        const createdTransaction = await TransactionRepository.save(
+          newTransaction
+        );
+        const formatedNewTransaction = await formatNewTransaction.format(
+          createdTransaction
+        );
+
+        return formatedNewTransaction;
       } else {
         throw new Error(
           'Ops! Não é possível transferir para sua própria conta!'
