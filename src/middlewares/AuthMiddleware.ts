@@ -10,7 +10,7 @@ export default function AuthMiddleware(
 
   //se não houver
   if (!authorization) {
-    return res.sendStatus(401);
+    return res.status(401).send('Unauthorized');
   }
 
   //pegando o token do request.
@@ -20,6 +20,6 @@ export default function AuthMiddleware(
     const data = jwt.verify(token, process.env.SECRET_KEY); //comparando token depois de descripitografar o token com a nossa secret.
     console.log(data);
   } catch {
-    return res.sendStatus(401);
+    return res.status(401).send('Unauthorized');
   }
 }
