@@ -63,20 +63,11 @@ export class TransactionsController {
     req: Request,
     res: Response
   ): Promise<Response> {
-    const { account } = req.body;
+    const username = req.username;
 
     try {
-      const userTransactionsValidation = TransactionsUserSchema.validate(
-        req.body
-      );
-
-      if (userTransactionsValidation.error) {
-        return res.status(400).send({
-          Message: userTransactionsValidation.error.message,
-        });
-      }
       const returnTransactions =
-        await transactionService.getUserTransactionsByCashOut(account);
+        await transactionService.getUserTransactionsByCashOut(username);
 
       res.send(returnTransactions);
     } catch (error) {
