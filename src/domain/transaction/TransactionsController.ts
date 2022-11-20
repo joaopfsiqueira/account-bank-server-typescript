@@ -28,7 +28,8 @@ export class TransactionsController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { value, debitedAccount, creditedUsername } = req.body;
+    const { value, creditedUsername } = req.body;
+    const debitedAccount = req.username;
 
     try {
       const newTransaction = await transactionService.createTransaction(
