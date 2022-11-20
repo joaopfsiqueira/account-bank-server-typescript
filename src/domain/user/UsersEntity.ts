@@ -4,9 +4,11 @@ import {
   Column,
   OneToOne,
   JoinColumn,
-  Unique,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { Accounts } from '../account/AccountsEntity';
+import bcrypt = require('bcrypt');
 
 @Entity()
 export class Users {
@@ -24,6 +26,12 @@ export class Users {
 
   @Column()
   password: string;
+
+  @BeforeInsert() //antes de inserir a senha
+  @BeforeUpdate() // depois de inserir a senha (caso precisa atualizar a senha.)
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, 8);
+  }
 
   @OneToOne(() => Accounts)
   @JoinColumn()
