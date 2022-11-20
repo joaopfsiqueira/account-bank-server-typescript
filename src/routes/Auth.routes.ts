@@ -10,4 +10,4 @@ const authController = new AuthController();
  * Serviço para salvar um novo usuario.
  */
 
-AuthRouter.post('/', authController.login);
+AuthRouter.post('/', authController.authenticate);

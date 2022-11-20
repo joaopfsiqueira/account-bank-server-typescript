@@ -3,14 +3,15 @@ import { getErrorMessage } from '../../common/GetErrorMessage';
 import * as authService from './AuthService';
 
 export default class AuthController {
-  public async login(req: Request, res: Response): Promise<Response> {
+  public async authenticate(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
 
     try {
-      const login = await authService.loginUser(username, password);
-      return res.send(login);
+      const user = await authService.loginUser(username, password);
+
+      return res.send(user);
     } catch (error) {
-      return res.status(404).send(getErrorMessage(error));
+      return res.status(401).send(getErrorMessage(error));
     }
   }
 }
