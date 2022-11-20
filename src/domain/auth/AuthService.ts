@@ -14,14 +14,14 @@ export async function loginUser(
     });
 
     if (!loginUser) {
-      throw new Error('Username incorreto!');
+      throw new Error('Usuário ou senha incorretos!');
     }
 
     const isMatch = bcrypt.compareSync(password, loginUser.password);
     if (isMatch) {
       return loginUser;
     } else {
-      throw new Error('Senha errada!');
+      throw new Error('Usuário ou senha incorretos!');
     }
   } catch (error) {
     throw error;
