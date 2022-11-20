@@ -2,13 +2,17 @@
  * Criando controler, vai utilizar o repository do typeorm na sua ÚLTIMA VERSÃO! Poderia ser apenas o entity manager, mas por questão de entendimento de código, optei por usar o repository.
  */
 
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { createUserSchema, balanceUserSchema } from './UsersSchema';
 import * as userService from './UserService';
 import { getErrorMessage } from '../../common/GetErrorMessage';
 
 export default class UsersControllers {
-  public async validateParamsUser(req: Request, res: Response, next) {
+  public async validateParamsUser(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const validation = createUserSchema.validate(req.body);
       if (validation.error) {

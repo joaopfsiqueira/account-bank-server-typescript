@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as transactionService from './TransactionsService';
 
 import {
@@ -8,7 +8,11 @@ import {
 import { getErrorMessage } from '../../common/GetErrorMessage';
 
 export class TransactionsController {
-  public async validateParamsTransaction(req: Request, res: Response, next) {
+  public async validateParamsTransaction(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     try {
       const validation = TransactionSchema.validate(req.body);
       if (validation.error) {
