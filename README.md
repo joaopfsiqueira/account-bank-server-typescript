@@ -83,6 +83,28 @@ SECRET_KEY='Sua Secret Key'
 
 6. **IMPORTANTE!** Importe no seu postman as collection que eu deixei no repositório junto das variáveis globais do postman! Ambos estão prontos para uso e com exemplo de cada erro, sucesso ou problema!
 
+# 🕹️ Comandos
+
+### make down
+
+- Comando personalizado que criei para derrubar o container. `make down`
+- Vai executar debaixo dos panos o seguinte comando:
+
+```
+docker-compose down
+```
+
+### make restart
+
+- Comando personalizado que criei para reiniciar tudo do docker. `make restart`
+- Vai rodar os seguintes comandos:
+
+```
+		docker-compose down
+		docker compose up -d
+
+```
+
 # 📚 Pastas (Server)
 
 ```
