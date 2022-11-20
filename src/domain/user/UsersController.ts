@@ -38,9 +38,11 @@ export default class UsersControllers {
   public async create(req: Request, res: Response): Promise<Response> {
     const { username, password } = req.body; // associação por desestruturação.
     try {
-      const newUser = await userService.createUser(username, password);
+      await userService.createUser(username, password);
 
-      return res.send(newUser);
+      return res.status(200).send({
+        Message: 'Usuário criado com sucesso!',
+      });
     } catch (error) {
       return res.status(400).send(getErrorMessage(error));
     }
