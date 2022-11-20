@@ -18,7 +18,7 @@ export default function AuthMiddleware(
 
   //se não houver
   if (!authorization) {
-    return res.status(401).send({ Message: 'Token não é válido!' });
+    return res.status(401).send({ Message: 'Token não informado' });
   }
 
   //pegando o token do request.
@@ -33,6 +33,6 @@ export default function AuthMiddleware(
     req.username = username;
     return next();
   } catch {
-    return res.status(401).send({ Message: 'Token expirado!' });
+    return res.status(401).send({ Message: 'Token expirado ou inválido!' });
   }
 }
