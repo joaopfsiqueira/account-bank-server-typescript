@@ -50,15 +50,6 @@ export class TransactionsController {
     const username = req.username;
 
     try {
-      const userTransactionsValidation = TransactionsUserSchema.validate(
-        req.body
-      );
-
-      if (userTransactionsValidation.error) {
-        return res.status(400).send({
-          Message: userTransactionsValidation.error.message,
-        });
-      }
       const returnTransactions = await transactionService.getUserTransactions(
         username
       );
