@@ -12,11 +12,11 @@ De que coisas você precisa para rodar o server?
 
 - Ah! Estou utilizando a versão 18.12 do node! Sendo assim, recomendo utilizar a mesma para evitar bugs.
 
-### Mudando Versão do Node (se necessário)
+## Mudando Versão do Node (se necessário)
 
 - Para isso, recomendo a utilização do NVM!
 
-- Instalação Linux / WSL ->
+### Instalação Linux / WSL ->
 
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
@@ -38,7 +38,7 @@ Com isso, ele deve já estar utilizando a versão 18.12 do node!
 node -v
 ```
 
-- **[Instalação Windows](https://github.com/coreybutler/nvm-windows)**
+### **[Instalação NVM Windows](https://github.com/coreybutler/nvm-windows)**
 
 ### 🔧 Instalação
 
