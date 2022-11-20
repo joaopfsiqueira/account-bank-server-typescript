@@ -17,11 +17,24 @@ TransactionRouter.post(
   TransactionController.create
 );
 
-TransactionRouter.get('/user', TransactionController.transactions);
+TransactionRouter.get(
+  '/user',
+  AuthMiddleware,
+  TransactionController.transactions
+);
 TransactionRouter.get(
   '/user/cashout',
+  AuthMiddleware,
   TransactionController.transactionsCashOut
 );
 
-TransactionRouter.get('/user/cashin', TransactionController.transactionsCashIn);
-TransactionRouter.get('/user/bydate', TransactionController.transactionsDate);
+TransactionRouter.get(
+  '/user/cashin',
+  AuthMiddleware,
+  TransactionController.transactionsCashIn
+);
+TransactionRouter.get(
+  '/user/bydate',
+  AuthMiddleware,
+  TransactionController.transactionsDate
+);
