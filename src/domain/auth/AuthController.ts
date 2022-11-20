@@ -19,7 +19,7 @@ export default class AuthController {
 
       delete user.password;
       return res.json({
-        user,
+        username,
         token,
       });
     } catch (error) {
