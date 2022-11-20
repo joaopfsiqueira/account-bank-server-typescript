@@ -16,6 +16,7 @@ Frameworks, pacotes e linguagens utilizadas:
 - [express](https://expressjs.com/pt-br/4x/api.html) - Utizado para rodar nosso servidor.
 - [@hapi/joi](https://www.npmjs.com/package/@hapi/joi) - Validar parâmetros recebidos pelo body.
 - [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
+- [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) -  Dentro do *tsconfig.json*, em `target` e `lib: []`, estou utilizado o ES2021!
 
 Projeto 
 
