@@ -27,7 +27,7 @@ export async function createUser(
   }
 }
 
-export async function userBalance(username: string): Promise<number> {
+export async function userBalance(username: string): Promise<Users> {
   try {
     const balanceValue = await UserRepository.findOne({
       relations: {
@@ -35,7 +35,7 @@ export async function userBalance(username: string): Promise<number> {
       },
       where: { username },
     });
-    return balanceValue.account.balance;
+    return balanceValue;
   } catch (error) {
     throw new Error('Usuário não localizado!');
   }
