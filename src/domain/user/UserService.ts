@@ -18,8 +18,9 @@ export async function createUser(
     } else {
       const newAccount = await AccountService.createAccount();
       const newUser = new Users(username, password, newAccount);
-      delete newUser.password;
-      return await UserRepository.save(newUser);
+      const createdUser = await UserRepository.save(newUser);
+      delete createdUser.password;
+      return createdUser;
     }
   } catch (error) {
     throw error;
