@@ -51,7 +51,7 @@ export async function createTransaction(
 ): Promise<Transactions> {
   //pegando a account do username que vai receber a transferência!
   try {
-    const debitedAccount = await this.debitedAccount(username);
+    const debitedAccount = await this.getDebittedAccount(username);
     const creditedUsernameAccount = await this.getCreditedAccount(
       creditedUsername
     );
