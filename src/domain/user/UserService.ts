@@ -1,8 +1,8 @@
 import { UserRepository } from '../../repository/pgSQL/Repositories-pgSQL';
 import { Users } from './UsersEntity';
 import * as AccountService from '../account/AccountService';
+import * as Jwt from 'jsonwebtoken';
 import bcrypt = require('bcrypt');
-import { balanceUserSchema } from './UsersSchema';
 
 export async function findByUsername(username: string): Promise<Users> {
   return await UserRepository.findOneBy({
@@ -20,7 +20,6 @@ export async function createUser(
     } else {
       const newAccount = await AccountService.createAccount();
       const newUser = new Users(username, password, newAccount);
-      newUser.password = bcrypt.hashSync(password, 10); //pass + saltRounds
       return await UserRepository.save(newUser);
     }
   } catch (error) {
@@ -30,8 +29,9 @@ export async function createUser(
 
 export async function loginUser(
   username: string,
-  password: string
-): Promise<Users> {
+  password: string,
+  SECRET_KEY: string
+): Promise<Object> {
   try {
     const loginUser = await UserRepository.findOne({
       where: {
@@ -45,7 +45,7 @@ export async function loginUser(
 
     const isMatch = bcrypt.compareSync(password, loginUser.password);
     if (isMatch) {
-      return loginUser;
+      return { loginUser };
     } else {
       throw new Error('Senha errada!');
     }
