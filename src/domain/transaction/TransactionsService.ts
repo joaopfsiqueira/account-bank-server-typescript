@@ -53,26 +53,33 @@ export async function createTransaction(
 }
 
 export async function getUserTransactions(account: number): Promise<Object[]> {
-  const transactionsUser = await TransactionRepository.find({
-    relations: ['debitedAccount', 'creditedAccount'],
-    where: [
-      {
-        debitedAccount: {
-          id: account,
+  try {
+    const transactionsUser = await TransactionRepository.find({
+      relations: ['debitedAccount', 'creditedAccount'],
+      where: [
+        {
+          debitedAccount: {
+            id: account,
+          },
         },
-      },
-      {
-        creditedAccount: {
-          id: account,
+        {
+          creditedAccount: {
+            id: account,
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
+    if (transactionsUser.length > 0) {
+      const formatTransaction = new FormatTransaction();
+      const formatedTransaction = formatTransaction.insert(transactionsUser);
 
-  const formatTransaction = new FormatTransaction();
-  const formatedTransaction = formatTransaction.insert(transactionsUser);
-
-  return formatedTransaction;
+      return formatedTransaction;
+    } else {
+      throw new Error('Não existe transações realizadas por esse usuário!');
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getUserTransactionsByDate(date: Date): Promise<Object[]> {
