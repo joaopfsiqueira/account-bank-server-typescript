@@ -32,13 +32,15 @@ export class TransactionsController {
     const debitedAccount = req.username;
 
     try {
-      const newTransaction = await transactionService.createTransaction(
+      await transactionService.createTransaction(
         value,
         debitedAccount,
         creditedUsername
       );
 
-      return res.send(newTransaction);
+      return res.status(200).send({
+        Message: 'Transferência realizada com sucesso!',
+      });
     } catch (error) {
       return res.status(400).send(getErrorMessage(error));
     }
