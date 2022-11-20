@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as transactionService from './TransactionsService';
-import { CheckBalance } from '../../common/CheckBalance';
+
 import {
   TransactionSchema,
   TransactionsUserSchema,
@@ -26,38 +26,19 @@ export class TransactionsController {
   public async create(req: Request, res: Response): Promise<Response> {
     const { value, debitedAccount, creditedUsername } = req.body;
 
-    const creditedUsernameAccount = await transactionService.getCreditedAccount(
-      creditedUsername
-    );
+    try {
+      const newTransaction = await transactionService.createTransaction(
+        value,
+        debitedAccount,
+        creditedUsername
+      );
 
-    const balance = new CheckBalance();
-    const haveBalance = await balance.CheckUserBalance(debitedAccount, value);
-    if (haveBalance === true) {
-      if (creditedUsernameAccount.account.id != debitedAccount) {
-        if (creditedUsernameAccount) {
-          const newTransaction = await transactionService.createTransaction(
-            value,
-            debitedAccount,
-            creditedUsernameAccount
-          );
-
-          return res.send(newTransaction);
-        } else {
-          return res.status(400).send({
-            Message: 'Usuário não localizado!',
-          });
-        }
-      } else {
-        return res.status(400).send({
-          Message: 'Ops! Não é possível transferir para sua própria conta!',
-        });
-      }
-    } else {
-      return res.status(400).send({
-        Message: 'Saldo insuficiente!',
-      });
+      return res.send(newTransaction);
+    } catch (error) {
+      return res.status(400).send(getErrorMessage(error));
     }
   }
+
   public async transactions(req: Request, res: Response): Promise<Response> {
     const { account } = req.body;
 

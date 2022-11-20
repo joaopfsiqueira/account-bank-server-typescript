@@ -9,47 +9,74 @@ import { Accounts } from '../account/AccountsEntity';
 import { Users } from '../user/UsersEntity';
 import { FormatTransaction } from '../../common/FormatTransaction';
 import { MoreThan } from 'typeorm';
+import * as balance from '../../common/CheckBalance';
 
 export async function getCreditedAccount(
   creditedUsername: string
 ): Promise<Users> {
-  const creditedUsernameAccount = await UserRepository.findOne({
-    relations: {
-      account: true,
-    },
-    where: [{ username: creditedUsername }],
-  });
+  try {
+    const creditedUsernameAccount = await UserRepository.findOne({
+      relations: {
+        account: true,
+      },
+      where: [{ username: creditedUsername }],
+    });
 
-  return creditedUsernameAccount;
+    if (creditedUsernameAccount) {
+      return creditedUsernameAccount;
+    } else {
+      throw new Error('Usuário não localizado!');
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function createTransaction(
   value: number,
   debitedAccount: Accounts,
-  creditedUsernameAccount: Users
+  creditedUsername: string
 ): Promise<Transactions> {
   //pegando a account do username que vai receber a transferência!
+  try {
+    const creditedUsernameAccount = await this.getCreditedAccount(
+      creditedUsername
+    );
+    const haveBalance = await balance.CheckUserBalance(debitedAccount, value);
 
-  const newTransaction = new Transactions(
-    value,
-    debitedAccount,
-    creditedUsernameAccount.account
-  );
+    if (haveBalance === true) {
+      if (creditedUsernameAccount.account.id != debitedAccount) {
+        const newTransaction = new Transactions(
+          value,
+          debitedAccount,
+          creditedUsernameAccount.account
+        );
 
-  // atualizando
-  const updateDebitedAccount = await AccountRepository.findOneBy({
-    id: debitedAccount.id,
-  });
-  updateDebitedAccount.balance = updateDebitedAccount.balance - value;
+        // atualizando
+        const updateDebitedAccount = await AccountRepository.findOneBy({
+          id: debitedAccount.id,
+        });
+        updateDebitedAccount.balance = updateDebitedAccount.balance - value;
 
-  const updateCreditedAccount = await AccountRepository.findOneBy({
-    id: creditedUsernameAccount.account.id,
-  });
-  updateCreditedAccount.balance = updateCreditedAccount.balance + value; // como o + transforma em string, criei um transformer na entity para resolver o problema.
+        const updateCreditedAccount = await AccountRepository.findOneBy({
+          id: creditedUsernameAccount.account.id,
+        });
+        updateCreditedAccount.balance = updateCreditedAccount.balance + value; // como o + transforma em string, criei um transformer na entity para resolver o problema.
 
-  await AccountRepository.save(updateCreditedAccount);
-  await AccountRepository.save(updateDebitedAccount);
-  return await TransactionRepository.save(newTransaction);
+        await AccountRepository.save(updateCreditedAccount);
+        await AccountRepository.save(updateDebitedAccount);
+        return await TransactionRepository.save(newTransaction);
+      } else {
+        throw new Error(
+          'Ops! Não é possível transferir para sua própria conta!'
+        );
+      }
+    } else {
+      throw new Error('Saldo insuficiente!');
+    }
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getUserTransactions(account: number): Promise<Object[]> {
