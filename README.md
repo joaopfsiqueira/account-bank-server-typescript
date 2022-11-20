@@ -1,5 +1,20 @@
 # Account-bank Project
 
+Crição de conta bancária!
+
+Frameworks, pacotes e linguagens utilizadas: 
+- [Typescript](https://www.typescriptlang.org/) - Linguagem de programação utilizada, JavaScript com tipagem estática opcional à linguagem.
+- [NodeJs](https://nodejs.org/en/) - Software/Interpretador utilizado para rodar código TypesScript/JavaScript fora da Web.
+- [Docker](https://docs.docker.com/compose/) - Utilizado para **[Dockerizar](https://medium.com/trainingcenter/dockerizando-sua-aplica%C3%A7%C3%A3o-e18969613f4b)** minha aplicação, onde subi minha api e meu banco de dados!
+- [Typeorm](https://medium.com/trainingcenter/dockerizando-sua-aplica%C3%A7%C3%A3o-e18969613f4b) - Utilizado para gestão e controle do meu database!
+- []()
+- []()
+- [express](https://expressjs.com/pt-br/4x/api.html) - Utizado para rodar nosso servidor.
+- [@hapi/joi](https://www.npmjs.com/package/@hapi/joi) - Validar parâmetros recebidos pelo body.
+- [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
+
+Projeto 
+
 ## 🚀 Começando
 
 Consulte **[Instalação](#-instala%C3%A7%C3%A3o)** para saber como implantar o projeto.
