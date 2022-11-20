@@ -1,0 +1,1746 @@
+{
+	"info": {
+		"_postman_id": "cf456781-9642-4600-b6e2-c19a659d358c",
+		"name": "Account-bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14537349"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"joao\",\r\n    \"password\": \"Teste@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/auth",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joao\",\r\n    \"password\": \"Teste@1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "182"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b6-K9IT8TxBB7n7vY7zFrS6xZDN+/M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 04:13:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"joao\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvYW8iLCJpYXQiOjE2Njg5MTc1ODYsImV4cCI6MTY2OTAwMzk4Nn0.n7QfEqvnYX6j12hm8dXW9G0h_l4Xc-ppCIR_x_tyWdk\"\n}"
+						},
+						{
+							"name": "Username incorreto",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joa\",\r\n    \"password\": \"Teste@1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-eGT/+kUahaxWice6n9iGrc1Tmmc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:04:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Username incorreto!\"\n}"
+						},
+						{
+							"name": "Senha errada",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joao\",\r\n    \"password\": \"Teste@12\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/auth",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"auth"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-UTueFCoY+e3iMRVI4mQFxIyEKrc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:04:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Senha errada!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Criando usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"joao2\",\r\n    \"password\": \"Teste@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/users",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joao\",\r\n    \"password\": \"Teste@1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-smr0XrqIMgJGIy7Nnm7+vFRUgrY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 04:35:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Usuário criado com sucesso!\"\n}"
+						},
+						{
+							"name": "Password errado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joao\",\r\n    \"password\": \"Te\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "109"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6d-j9VN9hlgjFmkFNblsK0JXjOP3SQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:03:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Senha deve conter ao menos 8 caracteres, uma letra maíuscula, 1 caracter especial e 1 número!\"\n}"
+						},
+						{
+							"name": "User já cadastrado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"joao\",\r\n    \"password\": \"Teste@1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-AUocI7H8y3YpecsPRZInec6HIJQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:03:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Usuario já cadastrado!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Buscando saldo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/users/balance",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "joao1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users/balance",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"balance"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "joao1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-7K4g99pes9VbJ7FgZxn9y0NNLjk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:04:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Saldo\": \"R$ 100\"\n}"
+						},
+						{
+							"name": "Token Inválido ou Expirado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users/balance",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"balance"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "joao1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-i19dLegc4qLhrVLz0juopW1JGMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:05:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Token expirado ou inválido!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Buscando Transactions de Usuário",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/transactions/user",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"transactions",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "271"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10f-8R9lcG1RguOfBNMQ9V0RQPfg7DI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 04:01:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"33b28306-ad8a-49f1-8689-406eeb5bdb47\",\n        \"createdAt\": \"2022-11-20T04:01:06.497Z\"\n    },\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"46573e5d-2bd7-4cfe-b653-64178a55740f\",\n        \"createdAt\": \"2022-11-20T04:01:07.268Z\"\n    }\n]"
+						},
+						{
+							"name": "Token Inválido ou expirado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-i19dLegc4qLhrVLz0juopW1JGMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:06:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Token expirado ou inválido!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Transerindo saldo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": 10,\r\n    \"creditedUsername\": \"joao4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": 50,\r\n    \"creditedUsername\": \"joao2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-3G1lPB/iRdCv4ARtLBj0A18LaBM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 04:13:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Transferência realizada com sucesso!\"\n}"
+						},
+						{
+							"name": "Token expirado ou inválido!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": 50,\r\n    \"creditedUsername\": \"joao2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-i19dLegc4qLhrVLz0juopW1JGMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:06:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Token expirado ou inválido!\"\n}"
+						},
+						{
+							"name": "Saldo insuficiente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": 150,\r\n    \"creditedUsername\": \"joao2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-+iWUhiBxt8jJ5Jm+CD0bMLfASjk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:07:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Saldo insuficiente!\"\n}"
+						},
+						{
+							"name": "Transaferir para si mesmo",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": 10,\r\n    \"creditedUsername\": \"joao\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"48-9r1L2dldM/RabnsPuAVvy0rESBc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:08:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Ops! Não é possível transferir para sua própria conta!\"\n}"
+						},
+						{
+							"name": "Usuário não localizado!",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"value\": 10,\r\n    \"creditedUsername\": \"joao4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-psilSnXHPKs4sIoMv/6LmuGhu3s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:08:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Usuário não localizado!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cashouts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/transactions/user/cashout",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"transactions",
+								"user",
+								"cashout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user/cashout",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user",
+										"cashout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "271"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10f-8R9lcG1RguOfBNMQ9V0RQPfg7DI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 04:01:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"33b28306-ad8a-49f1-8689-406eeb5bdb47\",\n        \"createdAt\": \"2022-11-20T04:01:06.497Z\"\n    },\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"46573e5d-2bd7-4cfe-b653-64178a55740f\",\n        \"createdAt\": \"2022-11-20T04:01:07.268Z\"\n    }\n]"
+						},
+						{
+							"name": "Token expirado ou inválido!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user/cashout",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user",
+										"cashout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-i19dLegc4qLhrVLz0juopW1JGMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:07:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Token expirado ou inválido!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "CashIn",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/transactions/user/cashin",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"transactions",
+								"user",
+								"cashin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user/cashin",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user",
+										"cashin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "406"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"196-IssjkAqbhmzIjvw953Af0PoDI9s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 04:02:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"33b28306-ad8a-49f1-8689-406eeb5bdb47\",\n        \"createdAt\": \"2022-11-20T04:01:06.497Z\"\n    },\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"46573e5d-2bd7-4cfe-b653-64178a55740f\",\n        \"createdAt\": \"2022-11-20T04:01:07.268Z\"\n    },\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"7b2fc7f7-1049-4492-b5e3-f17311774f86\",\n        \"createdAt\": \"2022-11-20T04:01:23.484Z\"\n    }\n]"
+						},
+						{
+							"name": "Token expirado ou inválido!",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user/cashin",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user",
+										"cashin"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-i19dLegc4qLhrVLz0juopW1JGMA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:07:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Token expirado ou inválido!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Transactions By Date",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2022-11-19\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/transactions/user/bydate",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"transactions",
+								"user",
+								"bydate"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sem transações na data",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date\": \"2022-11-19\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user/bydate",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user",
+										"bydate"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-qBXHMa3cJtSw6V6e4XVws24sIHM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:05:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Não existe transações realizadas nesse data!\"\n}"
+						},
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"date\": \"2022-11-19\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/transactions/user/bydate",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transactions",
+										"user",
+										"bydate"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "136"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"88-ShjvQZFRNAsA8g56dh3TNA255Lc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 20 Nov 2022 05:06:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"value\": 50,\n        \"debitedAccount\": 1,\n        \"creditedAccount\": 2,\n        \"id\": \"23969396-6388-4a50-a32f-29ec2bf19f02\",\n        \"createdAt\": \"2022-11-20T05:06:20.396Z\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}
