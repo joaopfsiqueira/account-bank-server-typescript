@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getErrorMessage } from '../../common/GetErrorMessage';
 import * as authService from './AuthService';
+import * as jwt from 'jsonwebtoken';
 
 export default class AuthController {
   public async authenticate(req: Request, res: Response): Promise<Response> {
@@ -8,8 +9,14 @@ export default class AuthController {
 
     try {
       const user = await authService.loginUser(username, password);
+      const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+        expiresIn: '1d',
+      });
 
-      return res.send(user);
+      return res.json({
+        user,
+        token,
+      });
     } catch (error) {
       return res.status(401).send(getErrorMessage(error));
     }
