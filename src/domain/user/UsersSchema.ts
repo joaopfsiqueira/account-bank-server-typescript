@@ -1,7 +1,11 @@
 import Joi = require('joi');
 
 export const createUserSchema = Joi.object({
-  username: Joi.string().required().min(3),
+  username: Joi.string().required().min(3).messages({
+    'string.min': 'Username deve ter ao menos 3 letras.',
+    'string.empty': 'Username não pode ser vazio!',
+    'any.required': 'Campo username é necessário!',
+  }),
   password: Joi.string()
     .required()
     .pattern(
