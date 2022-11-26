@@ -16,13 +16,6 @@ export default class UsersControllers {
     try {
       const validation = createUserSchema.validate(req.body);
       if (validation.error) {
-        // if (validation.error.details[0].type === 'string.pattern.base') {
-        //   return res.status(400).send({
-        //     field: 'password',
-        //     Message:
-        //       'Senha deve conter ao menos 8 caracteres, uma letra maíuscula, 1 caracter especial e 1 número!',
-        //   });
-        // }
         return res.status(400).send({
           Message: validation.error.message,
         });
