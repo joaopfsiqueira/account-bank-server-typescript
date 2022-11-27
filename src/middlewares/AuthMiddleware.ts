@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { request } from 'http';
 import * as jwt from 'jsonwebtoken';
 
 // criando interface para o retorno do "Data" mais abaixo
