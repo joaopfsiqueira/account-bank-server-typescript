@@ -1,6 +1,6 @@
 # Account-bank Project
 
-Crição de conta bancária!
+Crição de conta bancária! Parte Back-end.
 
 Frameworks, pacotes e linguagens utilizadas:
 
@@ -18,6 +18,27 @@ Frameworks, pacotes e linguagens utilizadas:
 - [Joi](https://www.npmjs.com/package/@hapi/joi) - Validar parâmetros recebidos pelo body.
 - [dotenv](https://www.npmjs.com/package/dotenv) - Utilizado para armazenar variáveis de ambiente no projeto
 - [es2021](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) - Dentro do _tsconfig.json_, em `target` e `lib: []`, estou utilizado o ES2021!
+
+# Proposta do projeto 👣
+
+- Esse passo a passo espera que já tenha instalado na máquina NodeJs, TypeScript e Docker!
+
+1. Qualquer pessoa poderá criar uma conta. Para isso, basta realizar o cadastro informando username e password.
+2. Deve-se garantir que cada username seja único e composto por, pelo menos, 3 caracteres
+3. Deve-se garantir que a password seja composta por pelo menos 8 caracteres, um número e uma letra maiúscula. Lembre-se que ela deverá ser hashada ao ser armazenada no banco.
+4. Durante o processo de cadastro de um novo usuário, sua respectiva conta deverá ser criada automaticamente na tabela Accounts com um saldo de R$ 100,00. É importante ressaltar que caso ocorra algum problema e o usuário não seja criado, a tabela Accounts não deverá ser afetada
+5. Todo usuário deverá conseguir logar na aplicação informando username e password. Caso o login seja bem-sucedido, um token JWT (com 24h de validade) deverá ser fornecido
+6. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de visualizar seu próprio saldo atual. Um usuário A não pode visualizar o saldo de um usuário B, por exemplo.
+7. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de realizar um cash-out informando o username do usuário que sofrerá o cash-in), caso apresente saldo suficiente para isso. Atente-se ao fato de que um usuário não deverá ter a possibilidade de realizar uma transferência para si mesmo
+8. Toda nova transação bem-sucedida deverá ser registrada na tabela Transactions. Em casos de falhas transacionais, a tabela Transactions não deverá ser afetada.
+9. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de visualizar as transações financeiras (cash-out e cash-in) que participou. Caso o usuário não tenha participado de uma determinada transação, ele nunca poderá ter acesso a ela.
+10. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de filtrar as transações financeiras que participou por:
+
+Data de realização da transação e/ou
+
+Transações de cash-out;
+
+Transações de cash-in.
 
 # 🚀 Começando
 
@@ -210,24 +231,3 @@ docker network inspect networkId
 Dentro, vai ter os dois containers com ipv4 subsequente!
 
 - Dentro do arquivo tem variáveis que retornam do .env, sim! O docker-compose-yml entende o .env do seu projeto! Por isso eu sugeri que o .env fosse criado, é necessário as variáveis que estão nele dentro daquele formato que eu passei para criar um container!
-
-# Proposta do projeto 👣
-
-- Esse passo a passo espera que já tenha instalado na máquina NodeJs, TypeScript e Docker!
-
-1. Qualquer pessoa poderá criar uma conta. Para isso, basta realizar o cadastro informando username e password.
-2. Deve-se garantir que cada username seja único e composto por, pelo menos, 3 caracteres
-3. Deve-se garantir que a password seja composta por pelo menos 8 caracteres, um número e uma letra maiúscula. Lembre-se que ela deverá ser hashada ao ser armazenada no banco.
-4. Durante o processo de cadastro de um novo usuário, sua respectiva conta deverá ser criada automaticamente na tabela Accounts com um saldo de R$ 100,00. É importante ressaltar que caso ocorra algum problema e o usuário não seja criado, a tabela Accounts não deverá ser afetada
-5. Todo usuário deverá conseguir logar na aplicação informando username e password. Caso o login seja bem-sucedido, um token JWT (com 24h de validade) deverá ser fornecido
-6. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de visualizar seu próprio saldo atual. Um usuário A não pode visualizar o saldo de um usuário B, por exemplo.
-7. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de realizar um cash-out informando o username do usuário que sofrerá o cash-in), caso apresente saldo suficiente para isso. Atente-se ao fato de que um usuário não deverá ter a possibilidade de realizar uma transferência para si mesmo
-8. Toda nova transação bem-sucedida deverá ser registrada na tabela Transactions. Em casos de falhas transacionais, a tabela Transactions não deverá ser afetada.
-9. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de visualizar as transações financeiras (cash-out e cash-in) que participou. Caso o usuário não tenha participado de uma determinada transação, ele nunca poderá ter acesso a ela.
-10. Todo usuário logado (ou seja, que apresente um token válido) deverá ser capaz de filtrar as transações financeiras que participou por:
-
-Data de realização da transação e/ou
-
-Transações de cash-out;
-
-Transações de cash-in.
