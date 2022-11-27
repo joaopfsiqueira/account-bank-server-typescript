@@ -8,8 +8,7 @@ import { Transactions } from './TransactionsEntity';
 import { Users } from '../user/UsersEntity';
 import * as formatTransaction from '../../common/FormatTransaction';
 import * as balance from '../../common/CheckBalance';
-import { MoreThan } from 'typeorm';
-import { resolve } from 'path';
+import { Equal, MoreThan } from 'typeorm';
 
 export async function getAccount(username: string): Promise<number> {
   //não é preciso try cat, uma vez que para chegar aqui, os erros estão sendo tratados no middleware de auth.
@@ -129,7 +128,7 @@ export async function getUserTransactionsByDate(date: Date): Promise<Object[]> {
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: {
-        createdAt: MoreThan(date),
+        createdAt: Equal(date),
       },
     });
 
