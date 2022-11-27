@@ -146,8 +146,6 @@ export async function getUserTransactionsByDate(
       ],
     });
 
-    console.log(transactionsUser);
-
     if (transactionsUser.length > 0) {
       const formatedTransaction = formatTransaction.insert(transactionsUser);
       return formatedTransaction;

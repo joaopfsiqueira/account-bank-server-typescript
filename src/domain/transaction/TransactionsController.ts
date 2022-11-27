@@ -92,11 +92,14 @@ export class TransactionsController {
     res: Response
   ): Promise<Response> {
     const username = req.username;
-    const { date } = req.body;
-    console.log(username);
+    const { date } = req.query;
+
     try {
       const returnTransactions =
-        await transactionService.getUserTransactionsByDate(date, username);
+        await transactionService.getUserTransactionsByDate(
+          date as any,
+          username
+        );
 
       res.send(returnTransactions);
     } catch (error) {
