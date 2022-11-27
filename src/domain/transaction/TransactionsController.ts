@@ -91,11 +91,12 @@ export class TransactionsController {
     req: Request,
     res: Response
   ): Promise<Response> {
+    const username = req.username;
     const { date } = req.body;
-
+    console.log(username);
     try {
       const returnTransactions =
-        await transactionService.getUserTransactionsByDate(date);
+        await transactionService.getUserTransactionsByDate(date, username);
 
       res.send(returnTransactions);
     } catch (error) {
