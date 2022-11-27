@@ -129,7 +129,6 @@ export async function getUserTransactionsByDate(
 ): Promise<Object[]> {
   try {
     const debitedAccount = await this.getAccount(username);
-    console.log(debitedAccount);
     const transactionsUser = await TransactionRepository.find({
       relations: ['debitedAccount', 'creditedAccount'],
       where: [
