@@ -65,19 +65,20 @@ export async function createTransaction(
           creditedUsernameAccount.account
         );
 
-        // atualizando
+        // atualizando conta que foi debitada
         const updateDebitedAccount = await AccountRepository.findOneBy({
           id: debitedAccount.id,
         });
         updateDebitedAccount.balance = updateDebitedAccount.balance - value;
+        await AccountRepository.save(updateDebitedAccount);
 
+        // atualizando conta que foi creditada
         const updateCreditedAccount = await AccountRepository.findOneBy({
           id: creditedUsernameAccount.account.id,
         });
         updateCreditedAccount.balance = updateCreditedAccount.balance + value; // como o + transforma em string, criei um transformer na entity para resolver o problema.
 
         await AccountRepository.save(updateCreditedAccount);
-        await AccountRepository.save(updateDebitedAccount);
 
         return await TransactionRepository.save(newTransaction);
       } else {
